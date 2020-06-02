@@ -1,0 +1,121 @@
+/*查询条件、操作区域 */
+.conditonArea {
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+  .left {
+    width: calc(100% - 350px);
+    float: left;
+    max-height: 40px;
+    overflow: hidden;
+    transition: max-height 0.3s;
+    .el-form-item {
+      margin-bottom: 0 !important;
+      .el-form-item__label {
+        overflow: hidden;
+        font-size: 12px;
+      }
+      .el-form-item__content {
+        input,
+        select {
+          width: 90%;
+          height: 28px;
+          border: solid 1px #caced3;
+          border-radius: 3px;
+          background: #fff;
+          outline: none;
+          padding-left: 5px;
+        }
+        .el-date-editor.el-input,
+        .el-date-editor.el-input__inner {
+          width: 100%;
+        }
+        .el-date-editor {
+          input {
+            padding-left: 30px;
+          }
+        }
+      }
+    }
+    .timerange {
+      .el-form-item .el-form-item__content .el-date-editor.el-input {
+        width: 40%;
+        .el-input__inner {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .leftActive {
+    max-height: 1000px;
+    height: auto;
+  }
+  .moresee {
+    display: inline-block;
+    height: 32px;
+    line-height: 40px;
+    width: 40px;
+    float: left;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .right {
+    float: right;
+    margin-right: 15px;
+    margin-top: 5px;
+  }
+}
+
+/*  扁平风 */
+.condition {
+  .item {
+    label {
+      float: left;
+      font-size: 14px;
+      color: #b2d4f5;
+      box-sizing: border-box;
+      font-weight: 400;
+    }
+    input,
+    select {
+      height: 30px;
+      box-sizing: border-box;
+      &:focus {
+        border-color: #409eff;
+      }
+    }
+    textarea:focus {
+      border-color: #409eff;
+    }
+    input,
+    select,
+    textarea {
+      border: solid 1px #caced3;
+      border-radius: 3px;
+      outline: none;
+      padding-left: 5px;
+      background-color: #001f4e;
+      border: 1px solid #0079bf;
+      outline: none;
+      color: #fff;
+    }
+    .el-select {
+      .el-icon-arrow-up:before {
+        position: relative;
+        top: -4px;
+      }
+    }
+  }
+}
+
+// 扁平风
+.my-btn {
+  background-color: #2b90f1;
+  color: #fff;
+  display: inline-block;
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #66b1ff;
+  }
+}

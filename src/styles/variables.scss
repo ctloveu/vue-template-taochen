@@ -1,0 +1,34 @@
+$themeColor: #4890ea;
+// sidebar
+$subMenuActiveText:#f4f4f5; //https://github.com/ElemeFE/element/issues/12951
+$menuHover:#2b5094;
+$subMenuBg:#172f5a;
+$subMenuHover:#2b5094;
+$sideBarWidth: 210px;
+
+//header
+$headerHeight: 100px;
+$oldheaderHeight: 50px;
+
+//科技风颜色
+$t-color1:#ffac31;
+$t-color2:#03def0;
+$t-color3:#b2deff;
+$t-color4:#fff;
+$t-color5:#828ae3;
+$t-color6:#409EFF;
+$t-label:#b2d4f5;
+$t-desc:#fff;
+
+//科技风主题颜色
+$themekjText: #00f8ff;
+
+:export {
+    subMenuActiveText: $subMenuActiveText;
+    menuHover: $menuHover;
+    subMenuBg: $subMenuBg;
+    subMenuHover: $subMenuHover;
+    sideBarWidth: $sideBarWidth;
+    themeColor: $themeColor;
+    headerHeight: $headerHeight;
+}

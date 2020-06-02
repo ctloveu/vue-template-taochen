@@ -1,0 +1,87 @@
+//查询条件、操作区域
+.conditonArea-kj {
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+  .left {
+    width: calc(100% - 350px);
+    float: left;
+    max-height: 40px;
+    overflow: hidden;
+    transition: max-height 0.3s;
+    .el-form-item {
+      margin-bottom: 0 !important;
+      .el-form-item__label {
+        overflow: hidden;
+        font-size: 12px;
+        color: #fff;
+      }
+      .el-form-item__content {
+        color: #fff;
+        & > input,
+        & > select {
+          width: 90%;
+          height: 30px;
+          background-color: #001f4e;
+          border: solid 1px #0079bf;
+          border-radius: 3px;
+          outline: none;
+          padding-left: 5px;
+          color: #fff;
+        }
+        .el-date-editor.el-input {
+          .el-input__inner {
+            width: 100%;
+            background-color: #001f4e;
+            border: solid 1px #0079bf;
+            border-radius: 3px;
+            height: 30px;
+            line-height: 30px;
+            color: #fff;
+          }
+        }
+      }
+    }
+    .timerange {
+      .el-form-item .el-form-item__content .el-date-editor.el-input {
+        width: 40%;
+        .el-input__inner {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .leftActive {
+    max-height: 1000px;
+    height: auto;
+  }
+  .moresee {
+    display: inline-block;
+    height: 32px;
+    line-height: 40px;
+    width: 40px;
+    float: left;
+    font-size: 12px;
+    cursor: pointer;
+    color: #fff;
+  }
+  .right {
+    float: right;
+    margin-right: 15px;
+    margin-top: 5px;
+  }
+}
+
+//input select科技风
+.theme-input-kj,
+.theme-select-kj {
+  height: 30px;
+  line-height: 30px;
+  background-color: #001f4e;
+  border: solid 1px #0079bf;
+  color: #fff;
+  padding-left: 10px;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}

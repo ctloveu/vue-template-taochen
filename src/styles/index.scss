@@ -1,0 +1,251 @@
+/*
+ * 公用布局样式,各主题命名尽量已大项目为前缀命名或加上前缀  尽量避免css冲突
+ * 建议在各项目最外层容器（DIV）加上已项目名为前缀或命名的class
+ * 建议减少使用important的使用
+ */
+
+// 公用主题颜色
+@import './variables.scss';
+
+// 混合css
+@import './mixin.scss';
+
+// 动画css
+@import './transition.scss';
+
+//扁平风
+@import './theme/zafk-theme-bp/element-ui.scss';
+@import './theme/zafk-theme-bp/index.scss';
+
+//科技风样式
+@import './theme/zafk-theme-kj/element-ui-kj.scss';
+@import './theme/zafk-theme-kj/index-kj.scss';
+@import './theme/zafk-theme-kj/index_dw.scss';
+
+body {
+  height: 100%;
+  min-width: 1080px;
+  min-height: 700px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+  font-size: 16px;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  outline: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+input,
+section,
+textarea {
+  background: transparent;
+}
+
+select {
+  cursor: pointer;
+}
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: ' ';
+    clear: both;
+    height: 0;
+  }
+}
+
+// main-container global css
+.app-container {
+  padding: 20px;
+}
+
+// 滚动条
+::-webkit-scrollbar-track-piece {
+  background: rgba(0, 248, 255, 0.5);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 248, 255, 0.5);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+
+//所有字体图标鼠标放上去手势
+.fa {
+  cursor: pointer;
+}
+
+img {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.h-center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: block;
+  margin: 0 auto;
+}
+
+.v-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.h100 {
+  height: 100%;
+}
+
+.wh100 {
+  height: 100%;
+  width: 100%;
+}
+
+//flex布局
+.flex {
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.layout-column,
+.layout-row {
+  box-sizing: border-box;
+  display: flex;
+}
+
+.layout-row {
+  flex-direction: row;
+}
+
+.layout-column {
+  flex-direction: column;
+}
+
+.layout-align-center-center {
+  align-items: center;
+  align-content: center;
+  max-width: 100%;
+  justify-content: center;
+}
+
+.wordWrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pr {
+  position: relative;
+}
+
+.pa {
+  position: absolute;
+}
+
+.requiredL {
+  position: relative;
+}
+
+.requiredL::before {
+  content: '*';
+  position: absolute;
+  font-size: 20px;
+  color: red;
+  left: -11px;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.table-btn {
+  color: #2b90f1;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.table-btn+.table-btn {
+  margin-left: 5px;
+}
+
+.wordWrap2 {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
