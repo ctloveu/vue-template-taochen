@@ -49,7 +49,7 @@ module.exports = {
    */
 
   /*
-   * 入口项目  name的值和入口项目路由值保持一致
+   * 入口模块  name的值和入口项目路由值保持一致
    */
   entry: {
     name: 'mainEntry',
@@ -57,7 +57,7 @@ module.exports = {
   },
 
   /*
-   * 登陆子项目(和单点登陆存一)
+   * 登陆模块(和单点登陆存一)
    */
   login: {
     name: 'login',
@@ -75,7 +75,7 @@ module.exports = {
   fhzzLogout: '',
 
   /*
-   * 子项目
+   * 子模块
    */
   subproject: [
     {
