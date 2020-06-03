@@ -14,12 +14,7 @@ module.exports = {
   /*
    * 免登陆白名单页面
    */
-  whiteList: ['/chat',
-    '/mainEntry',
-    '/planManagement/planManage',
-    '/njtjDutyDemo/patrolManage/dutyManage/duty',
-    '/njtjDutyDemo/patrolVisualization',
-  ],  //
+  whiteList: ['/mainEntry'],
 
   /*
    * 接口    ---require*
