@@ -10,7 +10,8 @@ Vue.use(ElementUI, {
 	locale
 })
 
-import '@/components/icons' // icon
+import '@/icons' // icon
+
 import '@/permission' // permission control
 
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
