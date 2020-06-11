@@ -1,8 +1,4 @@
 // 跳转前事件操作
-import router from './router'
-
-import NProgress from 'nprogress' // progress bar
-import 'nprogress/nprogress.css' // progress bar style
 
 import {
   getToken,
@@ -18,9 +14,16 @@ import {
   login
 } from '@/settings'
 
+import router from './router'
+
+import NProgress from 'nprogress' // progress bar
+import 'nprogress/nprogress.css' // progress bar style
+
 NProgress.configure({
   showSpinner: false
 }) // NProgress Configuration
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 router.beforeEach(async (to, from, next) => {
   //进度条开始
@@ -32,9 +35,11 @@ router.beforeEach(async (to, from, next) => {
   const hasToken = getToken()
   const userInfo = getStorage('userInfo')
 
-  next()
-  NProgress.done()
-  return
+  if (!isProduction) {
+    next()
+    NProgress.done()
+    return
+  }
 
   if (whiteList.indexOf(to.path) !== -1) { //在免费登录白名单中，直接进入
     next()
