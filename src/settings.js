@@ -53,7 +53,6 @@ module.exports = {
    */
   entry: {
     name: 'mainEntry',
-    router: '',
   },
 
   /*
@@ -61,7 +60,6 @@ module.exports = {
    */
   login: {
     name: 'login',
-    router: '',
     unadd: true
   },
 
