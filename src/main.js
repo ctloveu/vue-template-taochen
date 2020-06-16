@@ -42,14 +42,14 @@ import moment from "moment";
 Vue.prototype.$moment = moment;
 
 // 注入全局组件
-import '@globalComponent/globalComponent.js'
+import '@globalComponent'
 
 //注入全局自定义功能函数
 import fun from '@utils/global-f.js'
 Vue.use(fun);
 
 //注入全局自定义指令
-import '@/directives/index.js'
+import '@/directives'
 
 Vue.config.productionTip = false
 

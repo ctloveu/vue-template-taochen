@@ -18,11 +18,11 @@
 
 <script>
 import { Message } from "element-ui";
-import { setToken } from "@utils/module/auth.js";
+import { setToken } from "@utils";
 
 import "@public/commonJs/login/particles";
 import { initParticlesJS } from "@public/commonJs/login/initParticlesJS";
-import defaultSettings from "@/settings";
+import { entry } from "@/settings";
 
 export default {
   name: "Home",
@@ -47,7 +47,7 @@ export default {
     async ajaxLogin(params) {
       // 保存session token等
       // 跳转到首页
-      let path = "/" + defaultSettings.entry.name;
+      let path = "/" + entry.name;
       this.$router.push({
         path: path
       });

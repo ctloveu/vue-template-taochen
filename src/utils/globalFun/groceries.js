@@ -1,15 +1,18 @@
-import { entry, fhzzLogin, fhzzLogout } from '@/settings'
+import { login, entry, fhzzLogin, fhzzLogout } from '@/settings'
+import { removeCache } from '@utils'
 
 module.exports = {
-    //单点登陆
-    toFhzzLogin: () => {
+    //去登录登陆页面(也是退出登录)
+    toLogin: () => {
+        removeCache()
+        if (login && login.unadd) {
+            this.$router.push({
+                path: "/" + login.name
+            });
+            return
+        }
         let urls = window.btoa(window.location.host + '/#/' + entry.name)
         window.location.href = fhzzLogin + '?callBackUrl=' + urls
-    },
-    //单点登出
-    toFhzzLogout: () => {
-        let urls = window.btoa(window.location.host + '/#/' + entry.name)
-        window.location.href = fhzzLogout + '?callBackUrl=' + urls
     },
     //nextTick flag改变 fn回调封装
     nextTickTrue: function (flag, fn) {
@@ -83,5 +86,5 @@ module.exports = {
     },
     ImgComponentDescription: (v) => {
         return require('@public/componentDescrptImg/' + v)
-    }
+    },
 }

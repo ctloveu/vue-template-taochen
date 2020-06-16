@@ -1,5 +1,5 @@
 //表格相关公共方法
-const mTable = {
+export default {
     data() {
         return {
             dataList: [],
@@ -22,13 +22,13 @@ const mTable = {
             this.currentPage = val;
             this.query();
         },
-       
+
         //checkbox勾选改变
         selectionChange(val) {
             this.selectedList = val;
         },
         setHeight(refTable, refCondition) {
-            this.$nextTick(function() {
+            this.$nextTick(function () {
                 this.tableHeight =
                     this.$refs[refTable]["offsetHeight"] -
                     this.$refs[refCondition]["offsetHeight"] -
@@ -51,4 +51,3 @@ const mTable = {
         }
     }
 }
-export default mTable

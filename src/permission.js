@@ -1,20 +1,18 @@
 // 跳转前事件操作
+import router from './router'
 
 import {
   getToken,
-  removeCache,
   getPageTitle,
   getStorage,
-  toFhzzLogin,
-  toFhzzLogout
+  toLogin,
 } from '@utils'
 
 import {
   whiteList,
-  login
+  login,
+  isProduction
 } from '@/settings'
-
-import router from './router'
 
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
@@ -22,8 +20,6 @@ import 'nprogress/nprogress.css' // progress bar style
 NProgress.configure({
   showSpinner: false
 }) // NProgress Configuration
-
-const isProduction = process.env.NODE_ENV === 'production';
 
 router.beforeEach(async (to, from, next) => {
   //进度条开始
@@ -35,78 +31,62 @@ router.beforeEach(async (to, from, next) => {
   const hasToken = getToken()
   const userInfo = getStorage('userInfo')
 
-  if (!isProduction) {
+  function endTo() {
     next()
     NProgress.done()
+  }
+
+  if (!isProduction) {  //判断当前环境
+    endTo()
     return
   }
 
   if (whiteList.indexOf(to.path) !== -1) { //在免费登录白名单中，直接进入
-    next()
-  } else {
-    //判断用的是哪一个登陆
-    if (login && login.unadd) {
-      // 使用项目本身登陆  start
-      if (hasToken) {
-        if (to.path === '/login') {
-          next()
-        } else {
-          if (userInfo) {
-            next()
-          } else {
-            removeCache();
-            try {
-              next(`/login`)
-            } catch (error) {
-              next(`/login`)
-            }
-          }
-        }
-      } else {
-        next()
-      }
-      // 使用项目本身登陆  end
-    } else {
-      // 使用单点登陆跳转 start
-      /* if(to.path === '/mainEntry') {
-      	let tokenIndex = window.location.href.lastIndexOf('?token=')
-      	//判断是否成功从单点登陆返回首页
-      	if(tokenIndex !== -1) {
-      		next()
-      	} else {
-      		if(hasToken) {
-      			if(userInfo) {
-      				next()
-      			} else {
-      				removeCache();
-      				toFhzzLogin()
-      			}
-      		} else {
-      			toFhzzLogin()
-      		}
-      	}
-      } else { */
-      if (hasToken) {
-        if (to.path === '/') {
-          toFhzzLogin()
-        } else {
-          if (userInfo) {
-            next()
-          } else {
-            removeCache();
-            toFhzzLogin()
-          }
-        }
-      } else {
-        toFhzzLogin()
-      }
-      /*}*/
-      // 使用单点登陆跳转 end
-    }
+    endTo()
+    return
   }
 
-  NProgress.done()
+  if (!hasToken || !userInfo) {  //判断是否登录  判断用户信息是否存在
+    toLogin()
+  }
 
+  // 使用项目本身登陆  start
+  if (login && login.unadd) {
+    if (to.path === '/login') {  //判断用户是否进入的为登录页
+      toLogin()
+    }
+    endTo()
+    return
+  }  // 使用项目本身登陆  end
+
+  // 使用单点登陆跳转 start
+  /* if(to.path === '/mainEntry') {
+    let tokenIndex = window.location.href.lastIndexOf('?token=')
+    //判断是否成功从单点登陆返回首页
+    if(tokenIndex !== -1) {
+      next()
+    } else {
+      if(hasToken) {
+        if(userInfo) {
+          next()
+        } else {
+          removeCache();
+          toLogin()
+        }
+      } else {
+        toLogin()
+      }
+    }
+  } else { */
+
+  if (to.path !== '/' && userInfo) {
+    endTo()
+    return
+  }
+
+  toLogin();
+  /*}*/
+  // 使用单点登陆跳转 end
 })
 
 router.afterEach(() => {

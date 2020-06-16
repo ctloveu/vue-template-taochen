@@ -1,5 +1,6 @@
 /*
  *1.注入全局函数时注意箭头函数和非箭头函数的区别
+ *2.尽量少注入全局函数，避免函数命名冲突
  */
 const requireFun = require.context('./globalFun/', true, /\.(js)$/)
 
@@ -33,6 +34,7 @@ export default function (Vue, optonis) {
   requireFun.keys().forEach(__dirname => {
     // 获取组件的配置
     let _config = requireFun(__dirname)
+    _config = _config.default || _config  //export default 和 module.exports
 
     Object.keys(_config).forEach(_apiName => {
       if (!isPrototype[_apiName]) {
@@ -43,9 +45,7 @@ export default function (Vue, optonis) {
         }
       } else {
         // 给与命名冲突提示
-        console.log('该全局函数命名冲突!')
-        console.log('old_function文件：' + isPrototype[_apiName].__dirname)
-        console.log('new_function：' + __dirname)
+        console.error(`${_config[_apiName]}\n全局函数命名冲突!\nold_function文件：${isPrototype[_apiName].__dirname}\nnew_function：${__dirname}`)
       }
     })
   })

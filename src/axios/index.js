@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { getToken, removeCache } from '@utils/module/auth.js'
-import { toFhzzLogin, toFhzzLogout } from '@/utils/index'
+import { toLogin, getToken, removeCache } from '@/utils'
 import { Message } from 'element-ui'
 
 const axoiosInstance = axios.create({
@@ -19,45 +18,43 @@ const axoiosInstance = axios.create({
 
 //"X-Requested-With": "XMLHttpRequest"
 // http request interceptor
-axoiosInstance.interceptors.request.use(function(config) {
+axoiosInstance.interceptors.request.use(function (config) {
 	config.headers["AuthorizationToken"] = getToken()
-	if(localStorage.getItem("userInfo")) {
+	if (localStorage.getItem("userInfo")) {
 		config.headers["userInfo"] = localStorage.getItem("userInfo");
 	}
-	if(localStorage.getItem("JSESSIONID")) {
+	if (localStorage.getItem("JSESSIONID")) {
 		config.headers["JSESSIONID"] = localStorage.getItem("JSESSIONID");
 	}
 	return config;
-}, function(error) {
+}, function (error) {
 	return Promise.reject(error);
 });
 
-axoiosInstance.interceptors.response.use(function(response) {
+axoiosInstance.interceptors.response.use(function (response) {
 	let code = response.data.code
-	if(code || code === 0 || code == '0') {
-		if(code !== 0 && code !== '0') {
+	switch (code) {
+		case 0:
+			break;
+		case 1000000:
+			Message({
+				message: '登陆过期,请重新登陆!',
+				type: "warning"
+			});
+			setTimeout(function () {
+				removeCache()
+				toLogin()
+			}, 500);
+			break;
+		default:
 			console.error(`${response.config.url}接口错误:${response.data.message}`)
-			if(code === 1000000) {
-				Message({
-					message: '登陆过期,请重新登陆!',
-					type: "warning"
-				});
-				setTimeout(function() {
-					removeCache()
-					toFhzzLogin()
-				}, 500);
-			}
-		}
-	} else {
-		console.error(`${response.config.url}接口错误:${response.data.message}`)
-		// console.log("接口格式错误,无状态码!")
 	}
 	return response;
-}, function(err) {
+}, function (err) {
 	const status = err && err.response && err.response.status;
-	if(status) {
+	if (status) {
 		let msg = ""
-		switch(err.response.status) {
+		switch (err.response.status) {
 			case 401:
 				msg = "无权限"
 				break;
@@ -74,9 +71,9 @@ axoiosInstance.interceptors.response.use(function(response) {
 					message: msg,
 					type: "warning"
 				});
-				setTimeout(function() {
+				setTimeout(function () {
 					removeCache()
-					toFhzzLogin()
+					toLogin()
 				}, 500);
 				break;
 			default:
@@ -91,10 +88,10 @@ axoiosInstance.interceptors.response.use(function(response) {
 });
 
 // http request
-const $axios = function(url, method, params) {
+const $axios = function (url, method, params) {
 	return new Promise((resolve, reject) => {
 		axoiosInstance[method](url, params || {}).then((response) => {
-			if(response.status === 200) {
+			if (response.status === 200) {
 				resolve(response.data);
 			}
 		}).catch((error) => {

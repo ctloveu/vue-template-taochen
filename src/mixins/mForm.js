@@ -1,4 +1,4 @@
-const mForm = {
+export default {
     methods: {
         checkRequiredFields(form) {
             let From = $(form);
@@ -24,4 +24,3 @@ const mForm = {
         },
     }
 }
-export default mForm

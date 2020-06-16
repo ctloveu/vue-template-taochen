@@ -31,12 +31,7 @@ var constantRoutes = [{
 ]
 
 //导入模块路由
-import defaultSettings from '@/settings'
-const {
-	login,
-	entry,
-	subproject
-} = defaultSettings
+import { login, entry, subproject } from '@/settings'
 
 /*
  *登录

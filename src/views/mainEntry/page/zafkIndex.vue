@@ -50,7 +50,7 @@ import { Message } from "element-ui";
 
 import { setToken, getToken, removeCache } from "@utils/module/auth.js";
 import defaultSettings from "@/settings";
-import { getStorage, toFhzzLogin } from "@/utils/index";
+import { getStorage, toLogin } from "@/utils/index";
 
 import userSystemConfig from "@/mixins/userSystemConfig";
 
@@ -95,7 +95,7 @@ export default {
       //   if (login) {
       //     this.$router.push('/login');
       //   } else {
-      //     toFhzzLogin();
+      //     toLogin();
       //   }
       // }
 

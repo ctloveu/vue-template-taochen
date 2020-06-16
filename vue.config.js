@@ -5,11 +5,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin') // 去掉注释
 const CompressionWebpackPlugin = require('compression-webpack-plugin'); // 开启压缩
 const { HashedModuleIdsPlugin } = require('webpack');
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 // 引入配置文件
-const defaultSettings = require('./src/settings.js')
-const { login, entry, subproject } = defaultSettings
+const { login, entry, subproject, devIp, devPort, proxy, title, isProduction } = require('./src/settings.js')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -45,15 +42,15 @@ module.exports = {
   lintOnSave: false,
   productionSourceMap: isProduction ? true : false, //配合打包压缩使用
   devServer: {
-    host: defaultSettings.devIp || '',
-    port: defaultSettings.devPort,
+    host: devIp || '',
+    port: devPort,
     open: false,
     overlay: {
       warnings: false,
       errors: true
     },
     // detail: https://cli.vuejs.org/config/#devserver-proxy
-    proxy: defaultSettings.proxy,
+    proxy: proxy,
     //  proxyTable: defaultSettings.proxy,
   },
 
@@ -63,7 +60,7 @@ module.exports = {
   configureWebpack: config => {
     // provide the app's title in webpack's name field, so that
     // 可以在index.html中访问它以注入正确的标题。
-    config.name = defaultSettings.title
+    config.name = title
 
     // 注入各个大模块的别名
     Object.assign(config.resolve, {

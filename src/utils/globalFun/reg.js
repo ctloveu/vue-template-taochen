@@ -18,5 +18,5 @@ module.exports = {
         }
         delete newObj.$$hashKey
         return newObj;
-    }
+    },
 }

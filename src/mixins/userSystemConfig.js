@@ -1,21 +1,17 @@
 /* 获取用户系统配置引用 start */
-import defaultSettings from '@/settings';
+import { login } from '@/settings';
 
 import {
   setToken,
   getToken,
-  removeCache
-} from '@utils/module/auth.js';
-
-import {
+  removeCache,
   getStorage,
-  toFhzzLogin,
-  toFhzzLogout
+  toLogin,
 } from '@/utils/index';
 
 
 //登陆后获取用户相关系统配置信息
-const userSystemConfig = {
+export default {
   data() {
     return {
     }
@@ -23,9 +19,9 @@ const userSystemConfig = {
   methods: {
   },
   mounted() {
-    var login = defaultSettings.login && defaultSettings.login.unadd;
+    var _login = login && login.unadd;
     // 判断是否使用的是单点登录
-    if (!login) {
+    if (!_login) {
       var userId = '';
       let hash = window.location.hash
       if (hash.indexOf('?userTag=') > -1) {
@@ -48,7 +44,7 @@ const userSystemConfig = {
           if (hasToken && userInfo) {
             userId = userInfo.userId;
           } else {
-            toFhzzLogin();
+            toLogin();
           }
         } else {
           let userInfoUrl = window.location.href;
@@ -59,7 +55,7 @@ const userSystemConfig = {
             setToken(userInfoUrl.substring(tokenIndex + 7, userIndex));
             userId = userInfoUrl.substring(userIndex + 8, userInfoUrl.length);
           } else {
-            toFhzzLogin();
+            toLogin();
           }
         }
       }
@@ -74,4 +70,3 @@ const userSystemConfig = {
   watch: {
   }
 }
-export default userSystemConfig
