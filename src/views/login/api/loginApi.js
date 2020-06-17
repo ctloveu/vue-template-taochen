@@ -6,7 +6,7 @@ import {
 
 const upmsApi = {
     ajaxLogin(params) {
-        return postApiData(+ 'url', params)
+        return postApiData('url', params)
     }
 }
 
