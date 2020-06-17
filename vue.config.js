@@ -110,6 +110,8 @@ module.exports = {
         new UglifyJsPlugin({
           uglifyOptions: {
             output: {
+              // 根据开发环境设置是否使用hash命名
+              // filename: isProduction ? '[name].js' : '[name].[contenthash].js',
               comments: true, // 去掉注释
             },
             warnings: true, //  忽略警告

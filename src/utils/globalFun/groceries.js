@@ -1,16 +1,8 @@
 import { login, entry, fhzzLogin, fhzzLogout } from '@/settings'
-import { removeCache } from '@utils'
 
 module.exports = {
-    //去登录登陆页面(也是退出登录)
+    //去单点登录登陆页面(也是退出登录)
     toLogin: () => {
-        removeCache()
-        if (login && login.unadd) {
-            this.$router.push({
-                path: "/" + login.name
-            });
-            return
-        }
         let urls = window.btoa(window.location.host + '/#/' + entry.name)
         window.location.href = fhzzLogin + '?callBackUrl=' + urls
     },

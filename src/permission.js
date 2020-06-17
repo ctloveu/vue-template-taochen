@@ -6,6 +6,7 @@ import {
   getPageTitle,
   getStorage,
   toLogin,
+  removeCache
 } from '@utils'
 
 import {
@@ -20,6 +21,9 @@ import 'nprogress/nprogress.css' // progress bar style
 NProgress.configure({
   showSpinner: false
 }) // NProgress Configuration
+
+const loginRouter = require('@views/' + login.name + '/router/index.js')
+let loginPath = loginRouter.path
 
 router.beforeEach(async (to, from, next) => {
   //进度条开始
@@ -41,23 +45,35 @@ router.beforeEach(async (to, from, next) => {
     return
   }
 
-  if (whiteList.indexOf(to.path) !== -1) { //在免费登录白名单中，直接进入
+  if (whiteList.indexOf(to.path) > -1) { //在免登录白名单中，直接进入
     endTo()
     return
   }
 
-  if (!hasToken || !userInfo) {  //判断是否登录  判断用户信息是否存在
-    toLogin()
+  if (!hasToken || !userInfo) {  //判断是否登录  判断用户信息是否存在  然后跳转到对应登录
+    removeCache()
+    if (login && login.unadd) {
+      if (to.path !== loginPath) {  //判断用户是否进入的为登录页
+        next(`${loginPath}`)
+        NProgress.done()
+      } else {
+        endTo()
+      }
+    } else {
+      toLogin()
+    }
+    return
   }
 
   // 使用项目本身登陆  start
   if (login && login.unadd) {
-    if (to.path === '/login') {  //判断用户是否进入的为登录页
-      toLogin()
+    if (to.path === loginPath) {  //判断用户是否进入的为登录页
+      removeCache()
     }
     endTo()
     return
-  }  // 使用项目本身登陆  end
+  }
+  // 使用项目本身登陆  end
 
   // 使用单点登陆跳转 start
   /* if(to.path === '/mainEntry') {
@@ -79,7 +95,7 @@ router.beforeEach(async (to, from, next) => {
     }
   } else { */
 
-  if (to.path !== '/' && userInfo) {
+  if (to.path !== '/') {
     endTo()
     return
   }

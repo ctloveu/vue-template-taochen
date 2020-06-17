@@ -57,7 +57,7 @@ import userSystemConfig from "@/mixins/userSystemConfig";
 export default {
   components: {
   },
-  mixins: [userSystemConfig],
+  mixins: [], //userSystemConfig
   computed: {},
   data() {
     return {

@@ -50,7 +50,7 @@ module.exports = {
   },
 
   /* 单点登陆(和单点登陆存一)--服务器 */
-  fhzzLogin: '',
+  fhzzLogin: 'https://cn.vuejs.org/v2/guide/reactivity.html',
 
   /* 单点登出--服务器 */
   fhzzLogout: '',
