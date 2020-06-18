@@ -14,6 +14,7 @@ NProgress.configure({
   showSpinner: false
 }) // NProgress Configuration
 
+// 获取登录页面路由
 const loginRouter = require('@views/' + login.name + '/router/index.js')
 let loginPath = loginRouter.path
 
@@ -32,10 +33,10 @@ router.beforeEach(async (to, from, next) => {
     NProgress.done()
   }
 
-  if (!isProduction) {  //判断当前环境
-    endTo()
-    return
-  }
+  // if (!isProduction) {  //判断当前环境
+  //   endTo()
+  //   return
+  // }
 
   if (whiteList.indexOf(to.path) > -1) { //在免登录白名单中，直接进入
     endTo()
@@ -59,7 +60,7 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
-  if (!hasToken || !userInfo) {  //判断是否登录  判断用户信息是否存在  然后跳转到对应登录
+  if (!(hasToken && userInfo)) {  //判断是否登录  判断用户信息是否存在  然后跳转到对应登录
     removeCache()   //清除localstorage、cookie和sessionstorage
     if (login && login.unadd) {
       if (to.path !== loginPath) {  //判断用户是否进入的为登录页
@@ -68,10 +69,10 @@ router.beforeEach(async (to, from, next) => {
       } else {
         endTo()
       }
+      return
     } else {
       toLogin()
     }
-    return
   }
 
   // 使用项目本身登陆  start

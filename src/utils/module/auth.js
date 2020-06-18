@@ -4,20 +4,20 @@ const TokenKey = 'token'
 
 module.exports = {
 	getToken: () => {
-		return Cookies.get(TokenKey)
+		Cookies.get(TokenKey)
 	},
 	_getCookie: (name) => {
-		return Cookies.get(name)
+		Cookies.get(name)
 	},
 	setToken: (token) => {
-		return Cookies.set(TokenKey, token)
+		Cookies.set(TokenKey, token)
 	},
 	removeToken: () => {
-		return Cookies.remove(TokenKey)
+		Cookies.remove(TokenKey)
 	},
 	removeCache: () => {
 		sessionStorage.clear()
 		localStorage.clear()
-		return Cookies.remove(TokenKey)
+		Cookies.remove(TokenKey)
 	}
 }

@@ -10,16 +10,17 @@ console.log(_routes.keys())
  * 所有页面路由建议使用懒加载,除首页外
  * 懒加载会使页面加载的时候出现短暂空白，页面内容过多时不建议懒加载
  */
-var constantRoutes = [{
-	path: '/404',
-	component: (resolve) => require(['@views/404'], resolve),
-},
-// 全局组件描述页面路由
-{
-	path: '/components',
-	component: (resolve) => require(['@/components/componentDescription.vue'], resolve),
-	name: '全局组件',
-},
+var constantRoutes = [
+	// 	{
+	// 	path: '/404',
+	// 	component: (resolve) => require(['@views/404'], resolve),
+	// },
+	// 全局组件描述页面路由
+	{
+		path: '/components',
+		component: (resolve) => require(['@/components/componentDescription.vue'], resolve),
+		name: '全局组件',
+	},
 	/*{   //勿删
 	  path: '/',
 	  component: Layout,

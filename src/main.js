@@ -19,7 +19,8 @@ import '@/styles/index.scss' // global css 全局样式最后注入较好
 
 import '@/icons' // icon
 
-import '@/permission' // permission control
+// import '@/permission' // permission control
+import '@/permission_bak'
 
 // import VueAwesomeSwiper from 'vue-awesome-swiper'
 // import 'swiper/dist/css/swiper.css'

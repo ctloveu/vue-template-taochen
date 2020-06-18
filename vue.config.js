@@ -107,6 +107,8 @@ module.exports = {
     if (isProduction) {
 
       plugins.push(
+
+        // 最好使用uglifyjs-webpack-plugin@beta版本解决该插件不支持es6的问题
         new UglifyJsPlugin({
           uglifyOptions: {
             output: {
@@ -120,7 +122,8 @@ module.exports = {
               drop_debugger: true,
               pure_funcs: ['console']//移除console  .log
             }
-          }
+          },
+          parallel: true,//使用多进程并行运行来提高构建速度。默认并发运行数：os.cpus().length - 1。
         })
       )
 
@@ -202,7 +205,7 @@ module.exports = {
             .loader('image-webpack-loader')
             .options({ bypassOnDebug: true })
 
-          // webpack 会默认给commonChunk打进chunk-vendors，所以需要对webpack的配置进行delete
+          // webpack 会默认给commonChunk打进chunk - vendors，所以需要对webpack的配置进行delete
           config.optimization.delete('splitChunks')
 
           config
@@ -213,6 +216,7 @@ module.exports = {
               inline: /runtime\..*\.js$/
             }])
             .end()
+
           config
             .optimization.splitChunks({
               chunks: 'all',
