@@ -24,6 +24,9 @@ import "@public/commonJs/login/particles";
 import { initParticlesJS } from "@public/commonJs/login/initParticlesJS";
 import { entry } from "@/settings";
 
+import getUserInfo from "@/getUserInfo.js"; //获取用户信息等
+import { upmsApi as API } from "@login/api/loginApi.js";
+
 export default {
   name: "Home",
   data() {
@@ -45,15 +48,17 @@ export default {
       });
     },
     async ajaxLogin(params) {
+      // let res = await API.ajaxLogin();
+      // if(res.code == 0){}
       // 保存session token等
       // 跳转到首页
+
+      getUserInfo(userId, token); //根据用户id或者token获取用户信息等
+
       let path = "/" + entry.name;
       this.$router.push({
         path: path
       });
-      //获取码表
-      //获取用户权限
-      //获取用户信息---组织机构等
     }
   },
   mounted: () => {

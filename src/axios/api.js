@@ -27,29 +27,18 @@ export function postApiData(url, param) {
     return $axios(url, 'post', param);
 }
 
+export function uploadFileJSON(method, url, params) {
+    return $axios(url, method, params, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+}
+
 export function allApi(promiseArray) {
     return new Promise((resolve, reject) => {
         axios.all(promiseArray).then(allResponse => {
             resolve(allResponse);
-        }).catch((error) => {
-            reject(error);
-        });
-    });
-}
-
-export function uploadFile(method, url, params) {
-    const axoiosInstance = axios.create({
-        crossDomain: true,
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        },
-        withCredentials: true,
-    });
-    return new Promise((resolve, reject) => {
-        axoiosInstance[method](url, params || {}).then((response) => {
-            if (response.status === 200) {
-                resolve(response.data);
-            }
         }).catch((error) => {
             reject(error);
         });

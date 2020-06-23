@@ -88,8 +88,9 @@ axoiosInstance.interceptors.response.use(function (response) {
 });
 
 // http request
-const $axios = function (url, method, params) {
+const $axios = function (url, method, params, setting) {
 	return new Promise((resolve, reject) => {
+		Object.assign(axoiosInstance.defaults, setting)
 		axoiosInstance[method](url, params || {}).then((response) => {
 			if (response.status === 200) {
 				resolve(response.data);
@@ -99,4 +100,5 @@ const $axios = function (url, method, params) {
 		});
 	});
 };
+
 export default $axios;

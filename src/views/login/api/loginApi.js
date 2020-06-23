@@ -1,12 +1,15 @@
 import {
     getApiData,
     postApiData,
-    uploadFile
+    uploadFileJSON
 } from '@/axios/api';
 
 const upmsApi = {
     ajaxLogin(params) {
         return postApiData('url', params)
+    },
+    testJsonApi(params) {
+        return uploadFileJSON('post', 'url', params)
     }
 }
 

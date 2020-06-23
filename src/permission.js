@@ -44,7 +44,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   // 判断是否从单点登录跳转过来
-  if (!(login && login.unadd)) {
+  if (!(login && login.unadd)) { 
     let userInfoUrl = window.location.href;
     let tokenIndex = userInfoUrl.lastIndexOf('?token=');
     let userIndex = userInfoUrl.lastIndexOf('&userId=');
