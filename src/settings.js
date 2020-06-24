@@ -34,9 +34,9 @@ module.exports = {
 
   /*
    * 项目配置
-   * @name 	 @description子模块名       命名和项目文件夹名字必须保持一致     --require*
-   * @entry  @description设置该模块为入口模块
-   * @unadd	 @description是否添加路由	    --require*
+   * @name 	 @description子模块名       命名和项目文件夹名字必须保持一致      --require*
+   * @entry  @description设置该模块为入口模块                               --require*
+   * @unadd	 @description是否添加路由	                                     --require* 
    */
 
   /*  登陆模块(和单点登陆存一)  */
@@ -55,8 +55,7 @@ module.exports = {
   subproject: [
     {
       name: 'mainEntry', //入口项目
-      entry: true,
-      unadd: true,
+      entry: true
     },
     {
       name: 'planManagement', //简单流程

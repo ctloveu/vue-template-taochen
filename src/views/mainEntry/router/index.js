@@ -1,3 +1,5 @@
+// 两种输出路由方式
+
 // export default {
 // 	path: '/mainEntry',
 // 	component: () => import('@mainEntry/page/zafkIndex.vue'),

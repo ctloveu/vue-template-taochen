@@ -1,23 +1,4 @@
-import { subproject, signInLogin, signInLogout } from '@/settings'
-
 module.exports = {
-    //去单点登录登陆页面(也是退出登录)
-    toLogin: () => {
-        let entryName = ''
-        for (let i = 0; i < subproject.length; i++) {
-            const element = subproject[i];
-            if (element.entry) {
-                entryName = element.name
-                break
-            }
-        }
-        if (entryName == '') entryName = subproject[0].name  //若没有设置入口页  则默认第一个为入口模块
-        var router = require('@views/' + entryName + '/router/index.js')
-        router = router.default || router
-
-        let urls = window.btoa(window.location.host + '/#' + router.path)
-        window.location.href = signInLogin + '?callBackUrl=' + urls
-    },
     //nextTick flag改变 fn回调封装
     nextTickTrue: function (flag, fn) {
         this[flag] = false;

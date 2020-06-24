@@ -1,10 +1,27 @@
+/*
+ *	路由规定和标准
+ *  禁止子模块路由添加 redirect  --- 会导致控制权限困难
+ *  例：
+ *  {   
+        path: '',
+        redirect: 'templateManage-AED',
+	}
+	统一在以下和动态添加路由处添加，方便权限控制
+
+ *	子模块导出方式需为以下两种
+ *  export default {}  module.exports = {}
+ * 
+ */
+
+
+
 import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _routes = require.context('../views', true, /\[index].(js)$/)  //[router]\/[index]
-console.log(_routes.keys())
+// const _routes = require.context('../views', true, /\[index].(js)$/)  //[router]\/[index]
+// console.log(_routes.keys())
 
 /*
  * 所有页面路由建议使用懒加载,除首页外
@@ -32,7 +49,7 @@ var globalRoutes = [
 ]
 
 //导入模块路由
-import { login, subproject } from '@/settings' 
+import { login, subproject } from '@/settings'
 
 /*
  *登录
@@ -48,13 +65,30 @@ if (login && login.unadd) {
 	})
 }
 
+// 添加模块的路由默认界面 若涉及到权限 permission中可动态更改路由
+function addRedirect(router) {
+	if (router.children && router.children.length > 0) {
+		router.children.push({
+			path: '',
+			redirect: router.children[0].path,
+		})
+		for (let i = 0; i < router.children.length; i++) {
+			let element = router.children[i];
+			if (element.children && element.children.length > 0) addRedirect(router.children[i])
+		}
+	}
+	return router
+}
+
 /*
  *注入各个模块的路由
  */
 for (var i = 0; i < subproject.length; i++) {
-	if (subproject[i].unadd) {
+	if (subproject[i].entry || subproject[i].unadd) {
 		let router = require('@views/' + subproject[i].name + '/router/index.js');
-		globalRoutes.push(router.default || router)
+		router = router.default || router
+		globalRoutes.push(addRedirect(router))
+		// if (subproject.entry){}
 	}
 }
 

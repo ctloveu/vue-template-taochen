@@ -22,9 +22,8 @@ import { setToken } from "@utils";
 
 import "@public/commonJs/login/particles";
 import { initParticlesJS } from "@public/commonJs/login/initParticlesJS";
-// import { entry } from "@/settings";
 
-import getUserInfo from "@/getUserInfo.js"; //获取用户信息等
+import { getUserInfo, toMainEntry } from "@/utils"; //获取用户信息等
 import { upmsApi as API } from "@login/api/loginApi.js";
 
 export default {
@@ -38,10 +37,10 @@ export default {
   methods: {
     goLogin() {
       Message.closeAll();
-      if (!this.userName || !this.password) {
-        this.$message.error("用户名和密码不能为空！");
-        return;
-      }
+      // if (!this.userName || !this.password) {
+      //   this.$message.error("用户名和密码不能为空！");
+      //   return;
+      // }
       this.ajaxLogin({
         userName: this.userName,
         password: this.password
@@ -50,15 +49,8 @@ export default {
     async ajaxLogin(params) {
       // let res = await API.ajaxLogin();
       // if(res.code == 0){}
-      // 保存session token等
-      // 跳转到首页
-
-      getUserInfo(userId, token); //根据用户id或者token获取用户信息等
-
-      // let path = "/" + entry.name;
-      // this.$router.push({
-      //   path: path
-      // });
+      getUserInfo(); //userId 根据用户id或者token获取用户信息等
+      toMainEntry(this);  //此处必须传入this
     }
   },
   mounted: () => {

@@ -11,21 +11,12 @@ const arr = [
         name: '可视化',
         meta: [{ t: '可视化', p: '' }]
     },
-    {
-        path: '',
-        redirect: 'direction/alertInfo',
-    },
-
 ]
 
-const router = {
+module.exports = {
     path: '/socialPatrol',
     component: (resolve) => require(['@socialPatrol/components/layout'], resolve),
     children: [
         ...arr,
     ]
 }
-
-// export default router
-
-module.exports = router

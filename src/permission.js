@@ -1,11 +1,9 @@
 // 跳转前事件操作
 import router from './router'
 
-import { getToken, getPageTitle, getStorage, toLogin, removeCache, setToken } from '@utils'
+import { getToken, getPageTitle, getStorage, toSignInLogin, removeCache } from '@utils'
 
-import { whiteList, login, isProduction } from '@/settings'
-
-import getUserInfo from './getUserInfo.js';  //获取用户信息等
+import { whiteList, login, isProduction, getUserInfo } from '@/settings'
 
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
@@ -14,9 +12,14 @@ NProgress.configure({
   showSpinner: false
 }) // NProgress Configuration
 
-// 获取登录页面路由
-const loginRouter = require('@views/' + login.name + '/router/index.js')
-let loginPath = loginRouter.path
+// 判断内部登录模块是否存在
+const _loginUnAdd = login && login.unadd
+var loginRouter = {}, loginPath = ''
+if (_loginUnAdd) {
+  loginRouter = require('@views/' + login.name + '/router/index.js')
+  loginRouter = loginRouter.default || loginRouter
+}
+if (loginRouter && loginRouter.path) loginPath = loginRouter.path
 
 router.beforeEach(async (to, from, next) => {
   //进度条开始
@@ -44,14 +47,13 @@ router.beforeEach(async (to, from, next) => {
   }
 
   // 判断是否从单点登录跳转过来
-  if (!(login && login.unadd)) { 
+  if (!_loginUnAdd) {
     let userInfoUrl = window.location.href;
     let tokenIndex = userInfoUrl.lastIndexOf('?token=');
     let userIndex = userInfoUrl.lastIndexOf('&userId=');
     if (userIndex > -1) {
       let userId = userInfoUrl.substring(userIndex + 8, userInfoUrl.length);
       let token = userInfoUrl.substring(tokenIndex + 7, userIndex)
-      setToken(token);
 
       getUserInfo(userId, token)  //根据用户id或者token获取用户信息等
 
@@ -62,7 +64,7 @@ router.beforeEach(async (to, from, next) => {
 
   if (!(hasToken && userInfo)) {  //判断是否登录  判断用户信息是否存在  然后跳转到对应登录
     removeCache()   //清除localstorage、cookie和sessionstorage
-    if (login && login.unadd) {
+    if (_loginUnAdd) {
       if (to.path !== loginPath) {  //判断用户是否进入的为登录页
         next(`${loginPath}`)
         NProgress.done()
@@ -71,12 +73,12 @@ router.beforeEach(async (to, from, next) => {
       }
       return
     } else {
-      toLogin()
+      toSignInLogin()
     }
   }
 
   // 使用项目本身登陆  start
-  if (login && login.unadd) {
+  if (_loginUnAdd) {
     if (to.path === loginPath) {  //判断用户是否进入的为登录页
       removeCache()  //清除localstorage、cookie和sessionstorage
     }
@@ -90,7 +92,7 @@ router.beforeEach(async (to, from, next) => {
     endTo()
     return
   }
-  toLogin();
+  toSignInLogin();
   // 使用单点登陆跳转 end
 
 })
