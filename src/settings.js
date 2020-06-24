@@ -34,14 +34,10 @@ module.exports = {
 
   /*
    * 项目配置
-   * @name 	 @description子项目名       命名和项目文件夹名字必须保持一致     --require*
+   * @name 	 @description子模块名       命名和项目文件夹名字必须保持一致     --require*
+   * @entry  @description设置该模块为入口模块
    * @unadd	 @description是否添加路由	    --require*
    */
-
-  /* 入口模块  name的值和入口项目路由值保持一致  */
-  entry: {
-    name: 'mainEntry',
-  },
 
   /*  登陆模块(和单点登陆存一)  */
   login: {
@@ -50,13 +46,18 @@ module.exports = {
   },
 
   /* 单点登陆(和单点登陆存一)--服务器 */
-  fhzzLogin: 'https://cn.vuejs.org/v2/guide/reactivity.html',
+  signInLogin: 'https://cn.vuejs.org/v2/guide/reactivity.html',
 
   /* 单点登出--服务器 */
-  fhzzLogout: '',
+  signInLogout: '',
 
   /* 子模块  */
   subproject: [
+    {
+      name: 'mainEntry', //入口项目
+      entry: true,
+      unadd: true,
+    },
     {
       name: 'planManagement', //简单流程
       unadd: true,

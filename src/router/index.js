@@ -10,7 +10,7 @@ console.log(_routes.keys())
  * 所有页面路由建议使用懒加载,除首页外
  * 懒加载会使页面加载的时候出现短暂空白，页面内容过多时不建议懒加载
  */
-var constantRoutes = [
+var globalRoutes = [
 	// 	{
 	// 	path: '/404',
 	// 	component: (resolve) => require(['@views/404'], resolve),
@@ -32,27 +32,20 @@ var constantRoutes = [
 ]
 
 //导入模块路由
-import { login, entry, subproject } from '@/settings'
+import { login, subproject } from '@/settings' 
 
 /*
  *登录
  */
 if (login && login.unadd) {
-	let login_obj = require('@views/' + login.name + '/router/index.js');
-	constantRoutes.push(login_obj)
+	let router = require('@views/' + login.name + '/router/index.js');
+	router = router.default || router
+	globalRoutes.push(router)
 
-	constantRoutes.push({
+	globalRoutes.push({
 		path: '',
-		redirect: login_obj.path,
+		redirect: router.path,
 	})
-}
-
-/*
- *注入首页
- */
-if (entry) {
-	let entry_obj = require('@views/' + entry.name + '/router/index.js');
-	constantRoutes.push(entry_obj)
 }
 
 /*
@@ -60,8 +53,8 @@ if (entry) {
  */
 for (var i = 0; i < subproject.length; i++) {
 	if (subproject[i].unadd) {
-		let obj = require('@views/' + subproject[i].name + '/router/index.js');
-		constantRoutes.push(obj)
+		let router = require('@views/' + subproject[i].name + '/router/index.js');
+		globalRoutes.push(router.default || router)
 	}
 }
 
@@ -72,14 +65,14 @@ const errPage = {
 	path: '*',
 	redirect: '/404'
 }
-//  constantRoutes.push(errPage)
+//  globalRoutes.push(errPage)
 
 const createRouter = () => new Router({
 	//  mode: 'history', // require service support
 	scrollBehavior: () => ({
 		y: 0
 	}),
-	routes: constantRoutes
+	routes: globalRoutes
 })
 
 const router = createRouter()

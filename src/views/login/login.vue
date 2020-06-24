@@ -22,7 +22,7 @@ import { setToken } from "@utils";
 
 import "@public/commonJs/login/particles";
 import { initParticlesJS } from "@public/commonJs/login/initParticlesJS";
-import { entry } from "@/settings";
+// import { entry } from "@/settings";
 
 import getUserInfo from "@/getUserInfo.js"; //获取用户信息等
 import { upmsApi as API } from "@login/api/loginApi.js";
@@ -55,10 +55,10 @@ export default {
 
       getUserInfo(userId, token); //根据用户id或者token获取用户信息等
 
-      let path = "/" + entry.name;
-      this.$router.push({
-        path: path
-      });
+      // let path = "/" + entry.name;
+      // this.$router.push({
+      //   path: path
+      // });
     }
   },
   mounted: () => {

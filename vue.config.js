@@ -6,7 +6,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin'); // 开�
 const { HashedModuleIdsPlugin } = require('webpack');
 
 // 引入配置文件
-const { login, entry, subproject, devIp, devPort, proxy, title, isProduction } = require('./src/settings.js')
+const { login, subproject, devIp, devPort, proxy, title, isProduction } = require('./src/settings.js')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -19,11 +19,6 @@ var alias = {}
 if (login) {
   alias['@' + login.name] = resolve('src/views/' + login.name)
   alias['@' + login.name + 'P'] = resolve('src/views/' + login.name + '/page')
-}
-
-if (entry) {
-  alias['@' + entry.name] = resolve('src/views/' + entry.name)
-  alias['@' + entry.name + 'P'] = resolve('src/views/' + entry.name + '/page')
 }
 
 for (var i = 0; i < subproject.length; i++) {
