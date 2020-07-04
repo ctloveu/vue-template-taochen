@@ -54,7 +54,7 @@ module.exports = {
   /* 子模块  */
   subproject: [
     {
-      name: 'mainEntry', //入口项目
+      name: 'mainEntry', //入口项目必须放在第一个
       entry: true
     },
     {
@@ -63,7 +63,7 @@ module.exports = {
     },
     {
       name: 'socialPatrol', //可视化
-      unadd: true
+      unadd: false
     }
   ],
 }

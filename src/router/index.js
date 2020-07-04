@@ -13,8 +13,6 @@
  * 
  */
 
-
-
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -59,38 +57,37 @@ if (login && login.unadd) {
 	router = router.default || router
 	globalRoutes.push(router)
 
-	globalRoutes.push({
-		path: '',
-		redirect: router.path,
-	})
+	// globalRoutes.push({
+	// 	path: '',
+	// 	redirect: router.path,
+	// })
 }
 
 // 添加模块的路由默认界面 若涉及到权限 permission中可动态更改路由
-function addRedirect(router) {
-	if (router.children && router.children.length > 0) {
-		router.children.push({
-			path: '',
-			redirect: router.children[0].path,
-		})
-		for (let i = 0; i < router.children.length; i++) {
-			let element = router.children[i];
-			if (element.children && element.children.length > 0) addRedirect(router.children[i])
-		}
-	}
-	return router
-}
+// function addRedirect(router) {
+// 	if (router.children && router.children.length > 0) {
+// 		router.children.push({
+// 			path: '',
+// 			redirect: router.children[0].path,
+// 		})
+// 		for (let i = 0; i < router.children.length; i++) {
+// 			let element = router.children[i];
+// 			if (element.children && element.children.length > 0) addRedirect(router.children[i])
+// 		}
+// 	}
+// 	return router
+// }
 
 /*
  *注入各个模块的路由
  */
-for (var i = 0; i < subproject.length; i++) {
-	if (subproject[i].entry || subproject[i].unadd) {
-		let router = require('@views/' + subproject[i].name + '/router/index.js');
-		router = router.default || router
-		globalRoutes.push(addRedirect(router))
-		// if (subproject.entry){}
-	}
-}
+// for (var i = 0; i < subproject.length; i++) {
+// 	if (subproject[i].entry || subproject[i].unadd) {
+// 		let router = require('@views/' + subproject[i].name + '/router/index.js');
+// 		router = router.default || router
+// 		globalRoutes.push(addRedirect(router))
+// 	}
+// }
 
 /*
  * 404 page must be placed at the end !!!

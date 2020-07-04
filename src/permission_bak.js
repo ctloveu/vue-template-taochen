@@ -22,7 +22,7 @@ if (loginRouter && loginRouter.path) loginPath = loginRouter.path
 
 let asyncRouter
 
-go()  //初始化路由一次,避免默认进入路由不为默认页面
+// go()
 
 router.beforeEach(async (to, from, next) => {
   //进度条开始
@@ -45,9 +45,10 @@ router.beforeEach(async (to, from, next) => {
   //   return
   // }
 
-  if (hasPermissionList) {
+  if (!hasPermissionList) {
     if (!asyncRouter) {
       go(to, next)
+      asyncRouter = true
     }
   }
 
@@ -64,10 +65,7 @@ router.beforeEach(async (to, from, next) => {
     if (userIndex > -1) {
       let userId = userInfoUrl.substring(userIndex + 8, userInfoUrl.length);
       let token = userInfoUrl.substring(tokenIndex + 7, userIndex)
-
       getUserInfo(userId, token)  //根据用户id或者token获取用户信息等
-      go(to, next)
-
       endTo()
       return
     }
@@ -115,45 +113,47 @@ router.afterEach(() => {
 
 function go(to, next) {
   let asyncRouter = filterAsyncRouter()
+  console.log(asyncRouter)
   router.addRoutes(asyncRouter)
-  asyncRouter = true
   // next({ ...to, replace: true })
 }
 
 function filterAsyncRouter() {
-  /* 根据权限注入各个模块的路由 */
-  return addRedirect(subproject.reduce((arr, item) => {
-    if (item.entry || item.unadd) {
-      let router = require('@views/' + item.name + '/router/index.js');
-      arr.push(router.default || router)
+  let globalRoutes = []
+  /*
+   *注入各个模块的路由
+   */
+  for (var i = 0; i < subproject.length; i++) {
+    if (subproject[i].entry || subproject[i].unadd) {
+      let router = require('@views/' + subproject[i].name + '/router/index.js');
+      router = router.default || router
+      globalRoutes.push(addRedirect(router))
     }
-    return arr
-  }, []))
+  }
+  return globalRoutes
 }
 
 // 添加模块的路由默认界面 若涉及到权限 permission中可动态更改路由
 function addRedirect(router) {
-  if (router.children && router.children.length > 0) return arr //判断是否存在下级路由
-  let _arr = router.reduce((arr, element) => {
-    let _permission = !element.permission || hasPermission(element.permission)  //判断是否存在权限值和是否有该权限
-    if (!_permission) return arr
-    if (element.children && element.children.length > 0) {  //当存在下级路由 进行递归
-      let children = addRedirect(element.children)
-      if (children.length > 0) {  //判断下级是否存在有权限的路由
-        element.children = children
-        arr.push(element)
-        return arr
+  if (router.children && router.children.length > 0) {
+    // router.children.push({
+    //   path: '',
+    //   redirect: router.children[0].path,
+    // })
+    let firstIndex = 10000
+    for (let i = 0; i < router.children.length; i++) {
+      let element = router.children[i];
+      let _permission = !element.permission || hasPermission(element.permission)
+      if (_permission) {
+        if (firstIndex !== 10000) firstIndex = i
+        if (element.children && element.children.length > 0) addRedirect(router.children[i])
       }
     }
-    arr.push(element)
-    return arr
-  }, [])
-
-  if (_arr.length > 0) {
-    _arr.push({
+    firstIndex = firstIndex !== 10000 ? firstIndex : 0
+    router.children.push({
       path: '',
-      redirect: _arr[0].path
-    }) //添加默认进入路由
+      redirect: router.children[firstIndex].path,
+    })
   }
-  return _arr
+  return router
 }

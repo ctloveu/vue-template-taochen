@@ -3,6 +3,8 @@ import App from './App'
 import store from './store'
 import router from './router'
 
+import '@/permission' // permission control
+
 // 样式导入
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
@@ -18,8 +20,6 @@ import 'font-awesome/css/font-awesome.css'
 import '@/styles/index.scss' // global css 全局样式最后注入较好
 
 import '@/icons' // icon
-
-import '@/permission' // permission control
 
 // import VueAwesomeSwiper from 'vue-awesome-swiper'
 // import 'swiper/dist/css/swiper.css'

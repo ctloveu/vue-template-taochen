@@ -1,19 +1,6 @@
 // 全局组件注册
 import Vue from 'vue';
-
-// 处理首字母为大写  abc => Abc
-function upperFirst(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1)
-}
-
-// 驼峰命名<=中横线命名
-function camelCase(name) {
-    const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
-    const MOZ_HACK_REGEXP = /^moz([A-Z])/;
-    return name.replace(SPECIAL_CHARS_REGEXP, function (_, separator, letter, offset) {
-        return offset ? letter.toUpperCase() : letter;
-    }).replace(MOZ_HACK_REGEXP, 'Moz$1');
-}
+import { toUpperCaseFirst, camelCase } from "@/utils"
 
 // 获取正确的文件名
 function getFileName(__filename) {
@@ -32,9 +19,8 @@ function addComponent(requireComponent) {
     requireComponent.keys().forEach(__filename => {
         // 获取组件的配置
         let _config = requireComponent(__filename)
-        // console.log(_config)
 
-        let componentName = upperFirst(
+        let componentName = toUpperCaseFirst(
             // 剥去文件名开头的 `./` 和结尾的扩展名
             camelCase(
                 getFileName(
@@ -45,7 +31,7 @@ function addComponent(requireComponent) {
 
         if (!components[componentName]) {
             components[componentName] = true;
-            
+
             Vue.component(componentName,
                 // 如果这个组件选项是通过 `export default` 导出的，
                 // 那么就会优先使用 `.default`，

@@ -45,9 +45,10 @@ router.beforeEach(async (to, from, next) => {
   //   return
   // }
 
-  if (hasPermissionList) {
+  if (!hasPermissionList) {
     if (!asyncRouter) {
       go(to, next)
+      asyncRouter = true
     }
   }
 
@@ -64,10 +65,7 @@ router.beforeEach(async (to, from, next) => {
     if (userIndex > -1) {
       let userId = userInfoUrl.substring(userIndex + 8, userInfoUrl.length);
       let token = userInfoUrl.substring(tokenIndex + 7, userIndex)
-
       getUserInfo(userId, token)  //根据用户id或者token获取用户信息等
-      go(to, next)
-
       endTo()
       return
     }
@@ -115,8 +113,8 @@ router.afterEach(() => {
 
 function go(to, next) {
   let asyncRouter = filterAsyncRouter()
+  console.log(asyncRouter)
   router.addRoutes(asyncRouter)
-  asyncRouter = true
   // next({ ...to, replace: true })
 }
 
@@ -133,6 +131,32 @@ function filterAsyncRouter() {
 
 // 添加模块的路由默认界面 若涉及到权限 permission中可动态更改路由
 function addRedirect(router) {
+  // let arr = []
+  // let arrIndex = 0
+  // if (router.children && router.children.length > 0) return arr //判断是否存在下级路由
+
+  // for (let i = 0; i < router.length; i++) {
+  //   let element = router[i];
+  //   let _permission = !element.permission || hasPermission(element.permission)  //判断是否存在权限值和是否有该权限
+  //   if (!_permission) continue
+  //   if (element.children && element.children.length > 0) {  //当存在下级路由 进行递归
+  //     let children = addRedirect(element.children)
+  //     if (children.length > 0) {  //判断下级是否存在有权限的路由
+  //       arr.push(element)
+  //       arr[arrIndex].children = children
+  //       arrIndex++
+  //     }
+  //   } else {
+  //     arr.push(element)
+  //     arrIndex++
+  //   }
+  // }
+
+  // arr.push({  //添加默认进入路由
+  //   path: '',
+  //   redirect: arr[0].path,
+  // })
+
   if (router.children && router.children.length > 0) return arr //判断是否存在下级路由
   let _arr = router.reduce((arr, element) => {
     let _permission = !element.permission || hasPermission(element.permission)  //判断是否存在权限值和是否有该权限

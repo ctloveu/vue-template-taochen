@@ -1,3 +1,5 @@
+//module.exports = {}方式导出 单个文件需统一导出方式
+
 import Cookies from 'js-cookie'
 
 const TokenKey = 'token'
