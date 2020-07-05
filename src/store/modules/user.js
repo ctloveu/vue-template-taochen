@@ -1,4 +1,4 @@
-import { getToken, setToken, removeToken } from '@utils/module/auth.js'
+import { getToken, removeToken } from '@/utils'
 
 const state = {
   token: getToken(),

@@ -122,16 +122,17 @@ module.exports = {
         })
       )
 
-      // 服务器也要相应开启gzip
-      plugins.push(
-        new CompressionWebpackPlugin({
-          algorithm: 'gzip',
-          test: /\.(js|css|json|ttf|TTF|html)$/,// 匹配文件名
-          threshold: 10240, // 对超过10k的数据压缩
-          deleteOriginalAssets: true, // 被压缩的源文件是否保留，一般可以删除
-          minRatio: 0.8 // 压缩比
-        })
-      )
+      // 服务器也要相应开启gzip,一般不需要开启此项
+      // plugins.push(
+      //   new CompressionWebpackPlugin({
+      //     filename: '[path].gz[query]',
+      //     algorithm: 'gzip',
+      //     test: /\.(js|css|json|ttf|TTF|html)$/,// 匹配文件名
+      //     threshold: 10240, // 对超过10k的数据压缩
+      //     deleteOriginalAssets: false, // 被压缩的源文件是否保留，一般可以删除
+      //     minRatio: 0.8 // 压缩比
+      //   })
+      // )
 
       // 取消webpack警告的性能提示
       config.performance = {
