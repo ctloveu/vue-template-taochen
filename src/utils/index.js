@@ -1,6 +1,9 @@
 
-// 暴露全部功能函数，直接import { funtion_name} from '@utils'可引用
 /* 
+ *暴露全部功能函数，直接import { funtion_name} from '@utils'可引用
+ *import和module.exports不能再同一个文件使用
+ *原因：https://www.cnblogs.com/qingqingzou-143/p/7028683.html
+ * 
  *单个模块导出方式有以下四种
  * module.exports =  {}
  * export default {}

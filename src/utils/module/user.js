@@ -7,7 +7,7 @@ function toSignInLogin() {
     window.location.href = signInLogin + '?callBackUrl=' + urls
 }
 
-module.exports = {
+export default {
     // 获取用户信息并设置token等
     getUserInfo: (userId, token) => {
         if (token) setToken(token);

@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 
 const TokenKey = 'token'
 
-module.exports = {
+export default {
 	getToken: () => {
 		Cookies.get(TokenKey)
 	},

@@ -2,7 +2,7 @@ import { title as AppTitle } from '@/settings'
 import html2Canvas from 'html2canvas'
 import JsPDF from 'jspdf'
 
-module.exports = {
+export default {
     // 获取titile的值，然后重新赋值title的值
     getPageTitle: (pageTitle) => {
         const title = AppTitle;
