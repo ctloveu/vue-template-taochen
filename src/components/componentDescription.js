@@ -1,4 +1,4 @@
-//描述全局组件有哪些，方便团队统一开发和调度
+//描述功能组件有哪些，方便团队统一开发和调度
 /*
  * @name 组件名字
  * @decripton 组件功能描述
@@ -11,7 +11,7 @@ function ImgComponentDescription(v) {
 }
 
 export const data = [{
-	name: '未开发提示组件',
+	name: 'undoneHint',
 	decripton: '提示该功能模块没有开发',
 	img: ImgComponentDescription('undone.jpg'),
 	url: '/activitySecurity/undonePage',
