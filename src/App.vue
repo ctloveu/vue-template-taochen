@@ -7,7 +7,10 @@
 <script>
 export default {
   name: "App",
-  mounted() {},
+  mounted() {
+    var aaa = window.__gatewayUrl__
+    console.log(`网关地址${aaa}`);
+  },
   methods: {}
 };
 </script>

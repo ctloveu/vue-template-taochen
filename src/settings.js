@@ -30,7 +30,7 @@ module.exports = {
   },
 
   /* 免登陆白名单页面 */
-  whiteList: ['/mainEntry'],
+  whiteList: ['/mainEntry', '/components'],
 
   /*
    * 项目配置

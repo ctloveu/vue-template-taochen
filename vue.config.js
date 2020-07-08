@@ -6,24 +6,24 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin'); // 开�
 const { HashedModuleIdsPlugin } = require('webpack');
 
 // 引入配置文件
-const { login, subproject, devIp, devPort, proxy, title, isProduction } = require('./src/settings.js')
+const { login, subproject, devIp, devPort, proxy, title, isProduction } = require('./src/settings.js');
 
 function resolve(dir) {
-  return path.join(__dirname, dir)
+  return path.join(__dirname, dir);
 }
 
-var alias = {}
+var alias = {};
 /*
  * 注入登录页、入口页、和模块的别名
  */
 if (login) {
-  alias['@' + login.name] = resolve('src/views/' + login.name)
-  alias['@' + login.name + 'P'] = resolve('src/views/' + login.name + '/page')
+  alias['@' + login.name] = resolve('src/views/' + login.name);
+  alias['@' + login.name + 'P'] = resolve('src/views/' + login.name + '/page');
 }
 
 for (var i = 0; i < subproject.length; i++) {
-  alias['@' + subproject[i].name] = resolve('src/views/' + subproject[i].name)
-  alias['@' + subproject[i].name + 'P'] = resolve('src/views/' + subproject[i].name + '/page')
+  alias['@' + subproject[i].name] = resolve('src/views/' + subproject[i].name);
+  alias['@' + subproject[i].name + 'P'] = resolve('src/views/' + subproject[i].name + '/page');
 }
 
 
@@ -96,7 +96,7 @@ module.exports = {
     // 只打包改变的文件
     plugins.push(
       new HashedModuleIdsPlugin()
-    )
+    );
 
     // 生产环境时
     if (isProduction) {
@@ -113,14 +113,14 @@ module.exports = {
             },
             warnings: true, //  忽略警告
             compress: {
-              drop_console: true,
+              drop_console: false,
               drop_debugger: true,
               pure_funcs: ['console']//移除console  .log
             }
           },
           parallel: true,//使用多进程并行运行来提高构建速度。默认并发运行数：os.cpus().length - 1。
         })
-      )
+      );
 
       // 服务器也要相应开启gzip,一般不需要开启此项
       // plugins.push(
@@ -145,7 +145,7 @@ module.exports = {
         assetFilter: function (assetFilename) {
           return assetFilename.endsWith('.js');
         }
-      }
+      };
 
     } else { }
 
@@ -242,3 +242,19 @@ module.exports = {
       )
   }
 }
+
+// 清除dist文件夹
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+
+// module.exports = {
+//  plugins: [
+//    new CleanWebpackPlugin()
+//  ],
+//   module:{
+//     rules: [{
+//       test: /\.css$/,
+//       //对同一个模块使用多个loader，执行加载顺序是从后往前
+//       use: ['style-loader', 'css-loader']
+//     }]
+//   }
+// }

@@ -1,11 +1,12 @@
 <template>
   <div class="component">
-    <div class="title">全局组件注入说明</div>
+    <div class="title">功能组件注入说明</div>
     <img class="zoom" @dblclick="closeImg()" id="zoom" :src="zoom" :class="{zoomBlock:iszoom}" />
     <div class="item" v-for="(d,$index) in data" :key="$index">
       <div class="name" @dblclick="toPage(d.url)">名称：{{d.name}}</div>
       <div class="description">描述：{{d.decripton}}</div>
-      <img class="image" @dblclick="image(d.img)" :src="d.img" />
+      <!-- <img class="image" @dblclick="image(d.img)" :src="d.img" /> -->
+      <img class="image" @dblclick="image(d.img)" :src="'./componentDescrptImg/' + d.imgName" />
     </div>
   </div>
 </template>
@@ -20,25 +21,25 @@ export default {
     return {
       zoom: "",
       iszoom: false,
-      data: data,
+      data: data
     };
   },
   computed: {},
   methods: {
-    image(src){
-      this.zoom = src
-      this.iszoom = true
+    image(src) {
+      this.zoom = src;
+      this.iszoom = true;
     },
     closeImg() {
-      this.iszoom = false
+      this.iszoom = false;
     },
-    toPage(path){
-      if(!this.isNull(path)){
+    toPage(path) {
+      if (!this.isNull(path)) {
         let routeData = this.$router.resolve({
           path: path
         });
         window.open(routeData.href, "_blank");
-          // this.$router.push({ path: path });
+        // this.$router.push({ path: path });
       }
     }
   }
@@ -53,10 +54,10 @@ export default {
   overflow-y: auto;
   font-size: 14px;
   font-family: "微软雅黑";
-  div{
+  div {
     padding: 5px 0px;
   }
-  .name{
+  .name {
     cursor: pointer;
   }
   .item {
@@ -88,8 +89,8 @@ export default {
     transform: translateX(-50%);
     display: none;
   }
-  .zoomBlock{
-    display:block;
+  .zoomBlock {
+    display: block;
   }
 }
 </style>

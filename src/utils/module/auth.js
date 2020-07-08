@@ -5,19 +5,19 @@ import Cookies from 'js-cookie'
 const TokenKey = 'token'
 
 export default {
-	getToken: () => {
+	getToken() {
 		Cookies.get(TokenKey)
 	},
-	_getCookie: (name) => {
+	_getCookie(name) {
 		Cookies.get(name)
 	},
-	setToken: (token) => {
+	setToken(token) {
 		Cookies.set(TokenKey, token)
 	},
-	removeToken: () => {
+	removeToken() {
 		Cookies.remove(TokenKey)
 	},
-	removeCache: () => {
+	removeCache() {
 		sessionStorage.clear()
 		localStorage.clear()
 		Cookies.remove(TokenKey)

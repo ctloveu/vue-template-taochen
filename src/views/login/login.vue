@@ -20,8 +20,8 @@
 import { Message } from "element-ui";
 import { setToken } from "@utils";
 
-import "@public/commonJs/login/particles";
-import { initParticlesJS } from "@public/commonJs/login/initParticlesJS";
+import "@/assets/js/login/particles";
+import { initParticlesJS } from "@/assets/js/login/initParticlesJS";
 
 import { getUserInfo, toMainEntry } from "@/utils"; //获取用户信息等
 import { upmsApi as API } from "@login/api/loginApi.js";
@@ -80,7 +80,7 @@ export default {
   #particles-js {
     width: 100%;
     height: 100%;
-    background-image: url("../../../public/image/login/login_background.jpg");
+    background-image: url("../../assets/image/login/login_background.jpg");
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
@@ -103,7 +103,7 @@ export default {
   form {
     top: 30%;
     color: #fff;
-    background-image: url("../../../public/image/login/form.png");
+    background-image: url("../../assets/image/login/form.png");
     background-size: 100%;
     width: 604px;
     height: 389px;
@@ -168,7 +168,7 @@ export default {
       height: 40px;
       font-size: 16px;
       margin-top: 50px;
-      background-image: url("../../../public/image/login//login-btn.png");
+      background-image: url("../../assets/image/login//login-btn.png");
       background-size: 100% 100%;
       opacity: 0.91;
       margin: 0 auto;

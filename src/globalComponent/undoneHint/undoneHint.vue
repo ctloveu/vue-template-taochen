@@ -1,8 +1,8 @@
 <template>
     <div class="undone-content">
       <div class="undone-img">
-        <img class="undone-bg" :src="require('@pubImg/undonePage/bg.png')" />
-        <img class="undone-cilun" :src="require('@pubImg/undonePage/cilun.png')" />
+        <img class="undone-bg" :src="require('@/assets/image/undonePage/bg.png')" />
+        <img class="undone-cilun" :src="require('@/assets/image/undonePage/cilun.png')" />
       </div>
       <div class="text">{{title}}</div>
     </div>

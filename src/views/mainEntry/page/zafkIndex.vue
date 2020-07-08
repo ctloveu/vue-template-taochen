@@ -44,19 +44,17 @@
 </template>
 
 <script>
-import { menuDatas } from "@public/commonJs/mainEntry/index.js";
-
 import { Message } from "element-ui";
 
-import { setToken, getToken, removeCache } from "@utils/module/auth.js";
-import defaultSettings from "@/settings";
-import { getStorage, toLogin } from "@/utils/index";
-
 import userSystemConfig from "@/mixins/userSystemConfig";
+import defaultSettings from "@/settings";
+
+import { setToken, getToken, removeCache, getStorage, toLogin } from "@utils";
+
+import { menuDatas } from "./index.js";
 
 export default {
-  components: {
-  },
+  components: {},
   mixins: [], //userSystemConfig
   computed: {},
   data() {
@@ -293,13 +291,13 @@ export default {
   .swiper-pagination-bullet {
     width: 32px;
     height: 32px;
-    background: url("../../../../public/image/mainEntry/menu/xin_12.png")
+    background: url("../../../assets/image/mainEntry/menu/xin_12.png")
       no-repeat 0 0;
     opacity: 1;
     text-indent: -9999px;
   }
   .swiper-pagination-bullet-custom.swiper-pagination-bullet-active {
-    background: url("../../../../public/image/mainEntry/menu/xin_10.png")
+    background: url("../../../assets/image/mainEntry/menu/xin_10.png")
       no-repeat 0 0;
   }
 }

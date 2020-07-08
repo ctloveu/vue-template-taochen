@@ -1,6 +1,6 @@
 import { getApiData, allApi, postApiData } from '@/axios/api';
 import { login, signInLogin } from '@/settings'
-import { setToken, removeCache } from './auth.js'
+import auth from './auth.js'
 
 function toSignInLogin() {
     const urls = window.btoa(window.location.host + '/#/')
@@ -10,7 +10,9 @@ function toSignInLogin() {
 export default {
     // 获取用户信息并设置token等
     getUserInfo: (userId, token) => {
-        if (token) setToken(token);
+        if (token) {
+            auth.setToken(token);
+        }
         let params = {} // new Object()
         allApi([
             getApiData('url', params),
@@ -27,7 +29,7 @@ export default {
 
     //去登录登陆页面(也是退出登录)
     toLoginPage: function (_this) {   //_this必须手动传入进来,且_this为该项目Vue的实例
-        removeCache();  //清楚session等缓存
+        auth.removeCache();  //清楚session等缓存
         if (login && login.unadd) {
             let router = require('@views/' + login.name + '/router/index.js')
             router = router.default || router

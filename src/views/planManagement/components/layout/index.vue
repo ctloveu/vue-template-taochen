@@ -34,7 +34,7 @@ export default {
 <style lang="scss" scoped>
 @import "~@/styles/mixin.scss";
 @import "~@/styles/variables.scss";
-$path: "../../../../../public/image/";
+$path: "../../../../assets/image/";
 .app-wrapper {
   @include clearfix;
   position: relative;

@@ -68,8 +68,5 @@ module.exports = {
                 URL.revokeObjectURL(urlBlob);
             });
         };
-    },
-    ImgComponentDescription: (v) => {
-        return require('@public/componentDescrptImg/' + v)
-    },
+    }
 }

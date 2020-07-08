@@ -114,7 +114,7 @@ export default {
   height: 100% !important;
   background: transparent !important;
 }
-$path: "../../../../../../public/image/socialPatrol/direction/";
+$path: "../../../../../assets/image/socialPatrol/direction/";
 .alert-wrap {
   box-sizing: border-box;
   padding-bottom: 10px;

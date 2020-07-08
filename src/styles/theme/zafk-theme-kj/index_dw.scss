@@ -1,5 +1,5 @@
-$path: '../../public/image/common/';
-$pathImg: '../../public/image/';
+$path: '../assets/image/common/';
+$pathImg: '../assets/image/';
 
 // 科技风
 .el-dialog-sty2 {
@@ -34,7 +34,7 @@ $pathImg: '../../public/image/';
         width: 21px;
         height: 20px;
         background-size: 100% 100%;
-        background: url('../../public/image/common/close.png');
+        background: url('../assets/image/common/close.png');
         top: -2px;
         position: relative;
       }
@@ -89,7 +89,7 @@ $pathImg: '../../public/image/';
     height: 21px;
     left: 0;
     bottom: 0;
-    background: url('../../public/image/common/icon_left.png');
+    background: url('../assets/image/common/icon_left.png');
   }
 
   &::before {
@@ -97,7 +97,7 @@ $pathImg: '../../public/image/';
     height: 4px;
     right: 0;
     bottom: 0;
-    background: url('../../public/image/common/icon_right.png');
+    background: url('../assets/image/common/icon_right.png');
   }
 
   .btn {
@@ -117,7 +117,7 @@ $pathImg: '../../public/image/';
     width: 77px;
     height: 30px;
     background-size: 100% 100%;
-    background: url('../../public/image/common/btn-sm.png');
+    background: url('../assets/image/common/btn-sm.png');
     border: 0px solid transparent;
   }
 
@@ -125,7 +125,7 @@ $pathImg: '../../public/image/';
     width: 92px;
     height: 30px;
     background-size: 100% 100%;
-    background: url('../../public/image/common/btn-lg.png');
+    background: url('../assets/image/common/btn-lg.png');
   }
 
   label {
@@ -155,7 +155,7 @@ $pathImg: '../../public/image/';
     height: 21px;
     left: 0;
     bottom: 0;
-    background: url('../../public/image/common/icon_left.png');
+    background: url('../assets/image/common/icon_left.png');
   }
 
   &::before {
@@ -163,7 +163,7 @@ $pathImg: '../../public/image/';
     height: 4px;
     right: 0;
     bottom: 0;
-    background: url('../../public/image/common/icon_right.png');
+    background: url('../assets/image/common/icon_right.png');
   }
 
   .el-message-box__header {
@@ -189,7 +189,7 @@ $pathImg: '../../public/image/';
         width: 21px;
         height: 20px;
         background-size: 100% 100%;
-        background: url('../../public/image/common/close.png');
+        background: url('../assets/image/common/close.png');
         top: -2px;
         position: relative;
       }
@@ -212,7 +212,7 @@ $pathImg: '../../public/image/';
       height: 30px;
       width: 77px;
       background-size: 100% 100%;
-      background: url('../../public/image/common/btn-sm.png');
+      background: url('../assets/image/common/btn-sm.png');
       color: #fff;
     }
   }
@@ -255,21 +255,21 @@ select {
     width: 77px;
     height: 30px;
     background-size: 100% 100%;
-    background: url('../../public/image/common/btn-sm.png');
+    background: url('../assets/image/common/btn-sm.png');
   }
 
   .btn-sm {
     width: 77px;
     height: 30px;
     background-size: 100% 100%;
-    background: url('../../public/image/common/btn-sm.png');
+    background: url('../assets/image/common/btn-sm.png');
   }
 
   .btn-lg {
     width: 92px;
     height: 30px;
     background-size: 100% 100%;
-    background: url('../../public/image/common/btn-lg.png');
+    background: url('../assets/image/common/btn-lg.png');
   }
 
   button {
@@ -335,7 +335,7 @@ select {
         width: 21px;
         height: 20px;
         background-size: 100% 100%;
-        background: url('../../public/image/common/close.png');
+        background: url('../assets/image/common/close.png');
         top: -2px;
         position: relative;
       }

@@ -5,11 +5,14 @@
  * @img 组件图片名称    必须放在public/componentDescrptImg文件夹中
  * @url 组件被使用网页例子路由
  */
-import { ImgComponentDescription as img} from '@/utils/index'
+function ImgComponentDescription(v) {
+	return require('@/assets/componentDescrptImg/' + v)
+}
 
 export const data = [{
 	name: '未开发提示组件',
 	decripton: '提示该功能模块没有开发',
-	img: img('undone.jpg'),
+	img: ImgComponentDescription('undone.jpg'),
+	imgName: 'undone.jpg',
 	url: '/activitySecurity/undonePage',
 }]
