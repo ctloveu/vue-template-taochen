@@ -113,7 +113,7 @@ module.exports = {
             },
             warnings: true, //  忽略警告
             compress: {
-              drop_console: false,
+              drop_console: true,
               drop_debugger: true,
               pure_funcs: ['console']//移除console  .log
             }
