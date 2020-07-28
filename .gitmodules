@@ -1,0 +1,3 @@
+[submodule "common-frontend"]
+	path = common-frontend
+	url = https://github.com/ctloveu/common-frontend.git
