@@ -31,6 +31,22 @@ export default function (Vue, optonis) {
   // 自动化构建注入全局函数
   var isPrototype = {};
 
+  /**
+   * 注入全局函数
+   */
+  try {
+    const libraryUntils = require('@library/untils/global-f.js')
+    Object.keys(libraryUntils).forEach(_apiName => {
+      Vue.prototype[_apiName] = libraryUntils[_apiName];
+      isPrototype[_apiName] = {
+        isRequired: true,
+        __dirname: "common-frontend全局函数"
+      };
+    })
+  } catch (error) {
+    console.error(`公共库全局函数引入失败`)
+  }
+
   requireFun.keys().forEach(__dirname => {
     // 获取组件的配置
     let _config = requireFun(__dirname);

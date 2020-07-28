@@ -15,6 +15,22 @@ const requireFun = require.context('./', true, /\.(js)$/);
 var objFun = {};
 var isRequired = {}; //用于判断是否注册过相同的组件名
 
+/**
+ * 注入全局暴露函数
+ */
+try {
+    const libraryUntils = require('@library/untils')
+    Object.assign(objFun, libraryUntils)
+    Object.keys(libraryUntils).forEach(_apiName => {
+        isRequired[_apiName] = {
+            isRequired: true,
+            __dirname: "common-frontend全局函数"
+        };
+    })
+} catch (error) {
+    console.error(`公共库全局暴露函数引入失败`)
+}
+
 requireFun.keys().forEach(__dirname => {
     // 获取组件的配置
     let _config = requireFun(__dirname);

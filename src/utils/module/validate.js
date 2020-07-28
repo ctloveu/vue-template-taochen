@@ -1,5 +1,3 @@
-//export{}方式导出 单个文件需统一导出方式
-
 /*
 * @param {string} path
 * @returns {Boolean}

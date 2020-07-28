@@ -13,7 +13,7 @@ function resolve(dir) {
 }
 
 var alias = {};
-/*
+/** 
  * 注入登录页、入口页、和模块的别名
  */
 if (login) {
@@ -65,8 +65,7 @@ module.exports = {
         '@views': resolve('src/views'),
         '@globalComponent': resolve('src/globalComponent'),
         '@public': resolve('public'),
-        '@pubImg': resolve('public/image'),
-        '@pubCommJs': resolve('public/commonJs'),
+        '@library': resolve('common-frontend'),
         ...alias
       }
     })
