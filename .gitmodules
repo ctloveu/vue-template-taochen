@@ -1,3 +1,6 @@
 [submodule "common-frontend"]
 	path = common-frontend
 	url = https://github.com/ctloveu/common-frontend.git
+[submodule "src/svg"]
+	path = src/svg
+	url = https://github.com/ctloveu/svg.git
