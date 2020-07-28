@@ -1,3 +1,7 @@
+/**
+ * @file 项目入口文件
+ * @author 陈涛
+ */
 import Vue from 'vue';
 import App from './App';
 import store from './store';
@@ -15,15 +19,16 @@ Vue.use(ElementUI, {
 	locale
 });
 
+try {
+	import Icon from 'vue-svg-icon/Icon.vue'
+	Vue.component('icon', Icon)
+} catch (error) {
+	console.error(`全局SVG组价注入失败,检测当前SVG子仓库是否引入到项目`)
+}
+
 import 'font-awesome/css/font-awesome.css';
 
 import '@/styles/index.scss'; // global css 全局样式最后注入较好
-
-import '@/icons'; // icon
-
-// import VueAwesomeSwiper from 'vue-awesome-swiper'
-// import 'swiper/dist/css/swiper.css'
-// Vue.use(VueAwesomeSwiper)
 
 // 引入echarts
 import echarts from 'echarts';
