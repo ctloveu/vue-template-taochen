@@ -27,6 +27,11 @@ try {
             __dirname: "common-frontend全局函数"
         };
     })
+    // import('@library/untils').then(libraryUntils => {
+    // }).catch(err => {
+    //     console.error(`公共库全局暴露函数引入失败`)
+    // })
+
 } catch (error) {
     console.error(`公共库全局暴露函数引入失败`)
 }

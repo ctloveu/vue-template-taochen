@@ -1,16 +1,14 @@
-/*
+/**
+ *	@description 
  *	路由规定和标准
  *  禁止子模块路由添加 redirect  --- 会导致控制权限困难
- *  例：
- *  {   
-        path: '',
-        redirect: 'templateManage-AED',
-	}
-	统一在以下和动态添加路由处添加，方便权限控制
-
- *	子模块导出方式需为以下两种
- *  export default {}  module.exports = {}
- * 
+ *  例：{   
+ *       path: '',
+ *       redirect: 'templateManage-AED',
+ *	    }
+ *	统一在以下和动态添加路由处添加，方便权限控制
+ *
+ * @author 陈涛
  */
 
 import Vue from 'vue'
@@ -21,7 +19,7 @@ Vue.use(Router)
 // const _routes = require.context('../views', true, /\[index].(js)$/)  //[router]\/[index]
 // console.log(_routes.keys())
 
-/*
+/**
  * 所有页面路由建议使用懒加载,除首页外
  * 懒加载会使页面加载的时候出现短暂空白，页面内容过多时不建议懒加载
  */
@@ -49,18 +47,15 @@ var globalRoutes = [
 //导入模块路由
 import { login, subproject } from '@/settings'
 
-/*
- *登录
- */
+// 若本地登录存在,且使用本地登录,加载本地登录模块
 if (login && login.unadd) {
-	let router = require('@views/' + login.name + '/router/index.js');
-	router = router.default || router
-	globalRoutes.push(router)
-
-	// globalRoutes.push({
-	// 	path: '',
-	// 	redirect: router.path,
-	// })
+	try {
+		let router = require('@views/' + login.name + '/router/index.js');
+		router = router.default || router
+		globalRoutes.push(router)
+	} catch (err) {
+		console.error(`本地登录加载失败`)
+	}
 }
 
 // 添加模块的路由默认界面 若涉及到权限 permission中可动态更改路由

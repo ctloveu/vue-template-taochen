@@ -1,3 +1,7 @@
+/**
+ * @description 权限控制
+ * @author 陈涛
+ */
 // 跳转前事件操作
 import router from './router';
 
