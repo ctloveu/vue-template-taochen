@@ -1,12 +1,11 @@
 /**
- * @description 权限控制
+ * @description 权限控制,根据用户动态添加路由
  * @author 陈涛
  */
-// 跳转前事件操作
 import router from './router';
 
 import { getToken, getPageTitle, getStorage, toSignInLogin, removeCache, hasPermission } from '@utils';
-import { whiteList, login, subproject, isProduction, getUserInfo } from '@/settings';
+import { whiteList, login, mainEntry, getUserInfo } from '@/settings';
 
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
@@ -16,14 +15,11 @@ NProgress.configure({
 }); // NProgress Configuration
 
 // 判断内部登录模块是否存在
-const _loginUnAdd = login && login.unadd;
-var loginRouter = {}, loginPath = '';
+const _loginUnAdd = login && login != '';
+var loginPath = '';
 if (_loginUnAdd) {
-  loginRouter = require('@views/' + login.name + '/router/index.js');
-  loginRouter = loginRouter.default || loginRouter;
-}
-if (loginRouter && loginRouter.path) {
-  loginPath = loginRouter.path;
+  let loginRouter = require('@views/' + login + '/router.js');
+  loginPath = (loginRouter.default || loginRouter).path;
 }
 
 let asyncRouter;
@@ -120,50 +116,71 @@ router.afterEach(() => {
 })
 
 function go(to, next) {
-  let asyncRouter = filterAsyncRouter();
-  router.addRoutes(asyncRouter);
+  let asyncRouters = filterAsyncRouter();
+  router.addRoutes(asyncRouters);
   asyncRouter = true;
   // next({ ...to, replace: true })
 }
 
+/**
+ * @description 根据权限注入各个模块的路由
+ * @returns {arr}
+ */
 function filterAsyncRouter() {
-  /* 根据权限注入各个模块的路由 */
-  return addRedirect(subproject.reduce((arr, item) => {
-    if (item.entry || item.unadd) {
-      let router = require('@views/' + item.name + '/router/index.js');
-      arr.push(router.default || router);
+  const _routes = require.context('./views', true, /\/router\.(js)$/)
+  let asyncRouters = addRedirect(_routes.keys().reduce((arr, _dirname) => {
+    if (!_loginUnAdd && _dirname.indexOf(login.name) > -1) {
+      return arr
     }
+    const _config = _routes(_dirname)
+    arr.push(_config.default || _config)
     return arr
-  }, []));
+  }, []), 0);
+  if (mainEntry && mainEntry != '') {
+    let mainRoute = require('@views/' + mainEntry + '/router.js');
+    mainRoute = mainRoute.default || mainRoute
+    asyncRouters.push({
+      path: '',
+      redirect: mainRoute.path
+    })
+  } else {
+    asyncRouters.push({
+      path: '',
+      redirect: asyncRouters[0].path
+    })
+  }
+  return asyncRouters
 }
 
-// 添加模块的路由默认界面 若涉及到权限 permission中可动态更改路由
-function addRedirect(router) {
-  if (router.children && router.children.length > 0) {
-    return arr; //判断是否存在下级路由
-  }
+/**
+ * @description 添加模块的路由默认界面 若涉及到权限 permission中可动态更改路由
+ * @param {arr} router 
+ * @param {num} level 
+ * @returns {arr}
+ */
+function addRedirect(router, level) {
   let _arr = router.reduce((arr, element) => {
     let _permission = !element.permission || hasPermission(element.permission)  //判断是否存在权限值和是否有该权限
     if (!_permission) {
       return arr;
     }
     if (element.children && element.children.length > 0) {  //当存在下级路由 进行递归
-      let children = addRedirect(element.children);
+      let children = addRedirect(element.children, 1);
       if (children.length > 0) {  //判断下级是否存在有权限的路由
         element.children = children;
         arr.push(element);
-        return arr;
       }
+      return arr;
     }
     arr.push(element);
     return arr;
   }, []);
 
-  if (_arr.length > 0) {
+  if (_arr.length > 0 && level > 0) { //判断是否为顶层路由,顶层路由不添加默认路径
     _arr.push({
       path: '',
       redirect: _arr[0].path
-    }); //添加默认进入路由
+    });
   }
   return _arr;
 }

@@ -31,7 +31,7 @@ export default {
     toLoginPage: function (_this) {   //_this必须手动传入进来,且_this为该项目Vue的实例
         auth.removeCache();  //清楚session等缓存
         if (login && login.unadd) {
-            let router = require('@views/' + login.name + '/router/index.js')
+            let router = require('@views/' + login.name + '/router.js')
             router = router.default || router
             _this.$router.push({
                 //跳转到首页

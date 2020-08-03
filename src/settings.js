@@ -29,41 +29,18 @@ module.exports = {
     },
   },
 
-  /* 免登陆白名单页面 */
+  /* 免登陆白名单页面,免登陆白名单路由不能设置权限 */
   whiteList: ['/mainEntry', '/components'],
 
-  /*
-   * 项目配置
-   * @name 	 @description子模块名       命名和项目文件夹名字必须保持一致      --require*
-   * @entry  @description设置该模块为入口模块                               --require*
-   * @unadd	 @description是否添加路由	                                     --require* 
-   */
-
   /*  登陆模块(和单点登陆存一)  */
-  login: {
-    name: 'login',
-    unadd: true
-  },
+  login:  'login',
+
+  // 主项目项目名称
+  mainEntry: 'mainEntry',
 
   /* 单点登陆(和单点登陆存一)--服务器 */
   signInLogin: 'https://cn.vuejs.org/v2/guide/reactivity.html',
 
   /* 单点登出--服务器 */
-  signInLogout: '',
-
-  /* 子模块  */
-  subproject: [
-    {
-      name: 'mainEntry', //入口项目必须放在第一个
-      entry: true
-    },
-    {
-      name: 'planManagement', //简单流程
-      unadd: true,
-    },
-    {
-      name: 'socialPatrol', //可视化
-      unadd: false
-    }
-  ],
+  signInLogout: ''
 }

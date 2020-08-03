@@ -16,9 +16,6 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-// const _routes = require.context('../views', true, /\[index].(js)$/)  //[router]\/[index]
-// console.log(_routes.keys())
-
 /**
  * 所有页面路由建议使用懒加载,除首页外
  * 懒加载会使页面加载的时候出现短暂空白，页面内容过多时不建议懒加载
@@ -43,46 +40,6 @@ var globalRoutes = [
 	  ]
 	},*/
 ]
-
-//导入模块路由
-import { login, subproject } from '@/settings'
-
-// 若本地登录存在,且使用本地登录,加载本地登录模块
-if (login && login.unadd) {
-	try {
-		let router = require('@views/' + login.name + '/router/index.js');
-		router = router.default || router
-		globalRoutes.push(router)
-	} catch (err) {
-		console.error(`本地登录加载失败`)
-	}
-}
-
-// 添加模块的路由默认界面 若涉及到权限 permission中可动态更改路由
-// function addRedirect(router) {
-// 	if (router.children && router.children.length > 0) {
-// 		router.children.push({
-// 			path: '',
-// 			redirect: router.children[0].path,
-// 		})
-// 		for (let i = 0; i < router.children.length; i++) {
-// 			let element = router.children[i];
-// 			if (element.children && element.children.length > 0) addRedirect(router.children[i])
-// 		}
-// 	}
-// 	return router
-// }
-
-/*
- *注入各个模块的路由
- */
-// for (var i = 0; i < subproject.length; i++) {
-// 	if (subproject[i].entry || subproject[i].unadd) {
-// 		let router = require('@views/' + subproject[i].name + '/router/index.js');
-// 		router = router.default || router
-// 		globalRoutes.push(addRedirect(router))
-// 	}
-// }
 
 /*
  * 404 page must be placed at the end !!!
