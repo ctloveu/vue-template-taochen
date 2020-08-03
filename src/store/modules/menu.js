@@ -14,9 +14,14 @@ const actions = {
     }
 }
 
+const getters = {
+    sidebarOpen: state => state.sidebarOpen
+}
+
 export default {
     namespaced: true,
     state,
+    getters,
     mutations,
     actions
 }

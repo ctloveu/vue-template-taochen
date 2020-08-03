@@ -12,7 +12,7 @@
 
 const router = {
 	path: '/mainEntry',
-	component: () => import('@mainEntry/page/zafkIndex.vue'),
+	component: () => import('@views/mainEntry/page/zafkIndex.vue'),
 }
 
 export default router

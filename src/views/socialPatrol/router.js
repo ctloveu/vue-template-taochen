@@ -7,7 +7,7 @@ const arr = [
     // },
     {
         path: 'direction/alertInfo',
-        component: (resolve) => require(['@socialPatrolP/direction/alertInfo/alertInfo.vue'], resolve),
+        component: (resolve) => require(['@views/socialPatrol/direction/alertInfo/alertInfo.vue'], resolve),
         name: '可视化',
         meta: [{ t: '可视化', p: '' }]
     },
@@ -15,7 +15,7 @@ const arr = [
 
 module.exports = {
     path: '/socialPatrol',
-    component: (resolve) => require(['@socialPatrol/components/layout'], resolve),
+    component: (resolve) => require(['@views/socialPatrol/components/layout'], resolve),
     children: [
         ...arr,
     ]

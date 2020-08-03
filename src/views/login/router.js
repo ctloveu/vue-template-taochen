@@ -7,5 +7,5 @@
 
 module.exports = {
 	path: '/login',
-	component: (resolve) => require(['@login/login.vue'],resolve),
+	component: (resolve) => require(['@views/login/login.vue'],resolve),
 }

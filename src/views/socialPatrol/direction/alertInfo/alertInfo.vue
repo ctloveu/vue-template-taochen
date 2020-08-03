@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import bar3d from "@socialPatrolP/direction/alertInfo/bar3d/bar3d.vue";
-import alertRegionMap from "@socialPatrolP/direction/alertInfo/alertRegionMap/alertRegionMap.vue";
+import bar3d from "@views/socialPatrol/direction/alertInfo/bar3d/bar3d.vue";
+import alertRegionMap from "@views/socialPatrol/direction/alertInfo/alertRegionMap/alertRegionMap.vue";
 
 export default {
   components: {
@@ -114,7 +114,7 @@ export default {
   height: 100% !important;
   background: transparent !important;
 }
-$path: "../../../../../assets/image/socialPatrol/direction/";
+$path: "../../../../assets/image/socialPatrol/direction/";
 .alert-wrap {
   box-sizing: border-box;
   padding-bottom: 10px;

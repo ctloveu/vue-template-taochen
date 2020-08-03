@@ -24,7 +24,7 @@ import "@/assets/js/login/particles";
 import { initParticlesJS } from "@/assets/js/login/initParticlesJS";
 
 import { getUserInfo, toMainEntry } from "@/utils"; //获取用户信息等
-import { upmsApi as API } from "@login/api/loginApi.js";
+import { upmsApi as API } from "@views/login/api/loginApi.js";
 
 export default {
   name: "Home",

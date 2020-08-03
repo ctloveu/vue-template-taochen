@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import flow from "@planManagement/components/flow/flow";
+import flow from "@views/planManagement/components/flow/flow";
 export default {
   components: {
     flow

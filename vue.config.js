@@ -6,26 +6,15 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin'); // 开�
 const { HashedModuleIdsPlugin } = require('webpack');
 
 // 引入配置文件
-const { login, subproject, devIp, devPort, proxy, title, isProduction } = require('./src/settings.js');
+const { login, devIp, devPort, proxy, title, isProduction } = require('./src/settings.js');
 
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
 
-var alias = {};
 /** 
  * 注入登录页、入口页、和模块的别名
  */
-if (login) {
-  alias['@' + login.name] = resolve('src/views/' + login.name);
-  alias['@' + login.name + 'P'] = resolve('src/views/' + login.name + '/page');
-}
-
-for (var i = 0; i < subproject.length; i++) {
-  alias['@' + subproject[i].name] = resolve('src/views/' + subproject[i].name);
-  alias['@' + subproject[i].name + 'P'] = resolve('src/views/' + subproject[i].name + '/page');
-}
-
 
 //所有配置项说明都可以在https://cli.vuejs.org/config/中找到
 module.exports = {
@@ -65,8 +54,7 @@ module.exports = {
         '@views': resolve('src/views'),
         '@globalComponent': resolve('src/globalComponent'),
         '@public': resolve('public'),
-        '@library': resolve('common-frontend'),
-        ...alias
+        '@library': resolve('common-frontend')
       }
     })
 

@@ -40,9 +40,15 @@ const actions = {
   }
 }
 
+const getters = {
+  sidebar: state => state.sidebar,
+  device: state => state.app.device,
+}
+
 export default {
   namespaced: true,
   state,
+  getters,
   mutations,
   actions
 }

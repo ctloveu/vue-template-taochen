@@ -15,9 +15,20 @@ const actions = {
     },
 }
 
+const getters = {
+    codeTable: state => {
+        if (localStorage.getItem("codeTable")) {
+            return JSON.parse(localStorage.getItem("codeTable"))
+        } else {
+            return state.codeTable
+        }
+    }
+}
+
 export default {
     namespaced: true,
     state,
+    getters,
     mutations,
     actions
 }

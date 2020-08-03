@@ -5,14 +5,14 @@
 const arr = [
     {
         path: 'templateManage-AED',
-        component: (resolve) => require(['@planManagementP/templateManage/templateManageAED.vue'], resolve),
+        component: (resolve) => require(['@views/planManagement/templateManage/templateManageAED.vue'], resolve),
         name: '流程插件',
         permission: "test",
         meta: [],
     },
     {
         path: 'index',
-        component: (resolve) => require(['@planManagementP/planManagement.vue'], resolve),
+        component: (resolve) => require(['@views/planManagement/planManagement.vue'], resolve),
         permission: "test",
         name: '首页',
         meta: [],
@@ -21,7 +21,7 @@ const arr = [
 
 module.exports = {
     path: '/planManagement',
-    component: (resolve) => require(['@planManagement/components/layout'], resolve),
+    component: (resolve) => require(['@views/planManagement/components/layout'], resolve),
     children: [
         ...arr,
     ]
