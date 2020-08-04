@@ -10,13 +10,12 @@
  * export function funcName()
  * export { funcName }
  */
-const requireFun = require.context('./', true, /\.(js)$/);
 
 var objFun = {};
 var isRequired = {}; //用于判断是否注册过相同的组件名
 
 /**
- * 注入全局暴露函数
+ * 公共库全局暴露函数
  */
 try {
     const libraryUntils = require('@library/untils')
@@ -31,6 +30,10 @@ try {
     console.error(`公共库全局暴露函数引入失败`)
 }
 
+/**
+ * 全局暴露函数
+ */
+const requireFun = require.context('./', true, /\.(js)$/);
 requireFun.keys().forEach(__dirname => {
     // 获取组件的配置
     let _config = requireFun(__dirname);

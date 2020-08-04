@@ -56,23 +56,21 @@ function addComponent(requireComponent) {
     })
 }
 
-/*
-    require.context(arg1, arg2, arg3)
-        arg1 - 读取文件的路径
-        arg2 - 是否遍历文件的子目录
-        arg3 - 匹配文件的正则
- */
-
-const requireComponent = require.context('./', true, /\.(vue)$/)
-// console.log(requireComponent.keys())
-
-addComponent(requireComponent)
-
 try {
     const libraryComponent = require('@library/globalComponents')
     addComponent(libraryComponent.default || libraryComponent)
 } catch (error) {
     console.error(`载入公共库全局组件失败`)
 }
+
+/*
+    require.context(arg1, arg2, arg3)
+        arg1 - 读取文件的路径
+        arg2 - 是否遍历文件的子目录
+        arg3 - 匹配文件的正则
+ */
+const requireComponent = require.context('./', true, /\.(vue)$/)
+// console.log(requireComponent.keys())
+addComponent(requireComponent)
 
 components = null  //手动清楚components

@@ -32,7 +32,7 @@ export default function (Vue, optonis) {
   var isPrototype = {};
 
   /**
-   * 注入全局函数
+   * 注入公共库全局函数
    */
   try {
     const libraryUntils = require('@library/untils/global-f.js')
