@@ -1,5 +1,5 @@
 # 关于Vue + Git + Router + webpack等搭建的前端项目
-功能描述：
+#### 功能描述：
 1. 路由自动化构建，从代码和功能上模块化
 
 2. 指令自动化构建注册
@@ -25,19 +25,19 @@ git clone project(项目地址) --recursive
 git submodule update --init --recursive
 ```
 
-# 下载依赖包
+### 下载依赖包
 
 ```sh
 npm install
 ```
 
-# 开发环境
+####  开发环境
 
 ```sh
 npm run dev
 ```
 
-# 打包项目
+####  打包项目
 
 ```sh
 npm run build
