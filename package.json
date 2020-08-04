@@ -1,7 +1,6 @@
 {
-  "name": "zafk-backManage",
+  "name": "vue-template",
   "version": "4.2.1",
-  "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
