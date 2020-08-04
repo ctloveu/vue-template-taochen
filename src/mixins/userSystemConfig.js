@@ -4,7 +4,6 @@ import { login } from '@/settings';
 import {
   setToken,
   getToken,
-  removeCache,
   getStorage,
   toLogin,
 } from '@/utils/index';

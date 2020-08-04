@@ -12,17 +12,33 @@
 
 6. webpack打包配置
 
+#### 拉取代码
+
+```sh
+// 第一次拉取时可以加上--recursive直接拉取主代码及子模块
+git clone project(项目地址) --recursive
+```
+
+#### 拉取submodule
+
+```sh
+git submodule update --init --recursive
+```
+
 # 下载依赖包
+
 ```sh
 npm install
 ```
 
 # 开发环境
+
 ```sh
 npm run dev
 ```
 
 # 打包项目
+
 ```sh
 npm run build
 ```

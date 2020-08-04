@@ -1,5 +1,5 @@
-//描述全局组件有哪些，方便团队统一开发和调度
-/*
+/**
+ * @file 描述全局组件有哪些，方便团队统一开发和调度
  * @name 组件名字
  * @decripton 组件功能描述
  * @img 组件图片名称    必须放在public/componentDescrptImg文件夹中
