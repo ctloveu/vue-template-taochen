@@ -1,5 +1,6 @@
 /**
  * @file store主入口
+ * @description 模块命名规则为文件名,可自行添加规则
  * @author 陈涛
  */
 
@@ -14,14 +15,15 @@ var objStore = {}
 const requireStore = require.context('./modules', true, /\.(js)$/)
 requireStore.keys().forEach(__dirname => {
   let _config = requireStore(__dirname)
-  objStore[__dirname.replace(/^\.\/(.*)\.\w+$/, '$1')] = _config.default || _config
+  objStore[`${__dirname.replace(/^\.\/(.*)\.\w+$/, '$1')}`] = _config.default || _config
 })
 
 // 自动构建各个功能模块的store
 const moduleStore = require.context('../views', true, /\/store\.(js)$/)
 moduleStore.keys().forEach(__dirname => {
   let _config = moduleStore(__dirname)
-  objStore[__dirname.replace(/^\.\/(.*)\.\w+$/, '$1').split('/')[0]] = _config.default || _config
+  // 取项目名为模块名,可后缀添加Store区别其它
+  objStore[`${__dirname.replace(/^\.\/(.*)\.\w+$/, '$1').split('/')[0]}`] = _config.default || _config
 })
 
 let store = {

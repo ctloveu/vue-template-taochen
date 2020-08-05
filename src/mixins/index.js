@@ -7,6 +7,21 @@ var objFun = {};
 var isRequired = {}; //用于判断是否注册过相同的组件名
 
 /**
+ * 注入公共库mixins
+ */
+try {
+    const libraryMixins = require('@library/mixins')
+    addMixins(libraryMixins.default || libraryMixins)
+} catch (error) {
+    console.error(`公共库mixins引入失败`)
+}
+
+const requireFun = require.context('./', true, /\.(js)$/);
+addMixins(requireFun)
+
+isRequired = null;  //手动清空变量
+
+/**
  * 获取正确的文件名
  * @param {str} __filename 
  * @returns {str}
@@ -41,20 +56,5 @@ function addMixins(requireFun) {
         }
     });
 }
-
-/**
- * 注入公共库mixins
- */
-try {
-    const libraryMixins = require('@library/mixins')
-    addMixins(libraryMixins.default || libraryMixins)
-} catch (error) {
-    console.error(`公共库mixins引入失败`)
-}
-
-const requireFun = require.context('./', true, /\.(js)$/);
-addMixins(requireFun)
-
-isRequired = null;  //手动清空变量
 
 module.exports = objFun;

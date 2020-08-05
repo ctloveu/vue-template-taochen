@@ -46,7 +46,7 @@ module.exports = {
     // 可以在index.html中访问它以注入正确的标题。
     config.name = title
 
-    // 注入各个大模块的别名
+    // 注入别名
     Object.assign(config.resolve, {
       alias: {
         '@': resolve('src'),
