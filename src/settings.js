@@ -30,7 +30,7 @@ module.exports = {
   },
 
   /* 免登陆白名单页面,免登陆白名单路由不能设置权限 */
-  whiteList: ['/mainEntry', '/components'],
+  whiteList: ['/mainEntry', '/components', '/test'],
 
   /*  登陆模块(和单点登陆存一)  */
   login:  'login',
