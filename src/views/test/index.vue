@@ -1,12 +1,17 @@
 <template>
-  <div>
+  <div style="height: 2000px;">
       <!-- <input v-model.lazy="msg" />
       <el-input v-model.lazy="msg" @change="inputChange(msg)" />
       <div>{{msg}}</div>
       <div>{{num}}:{{msg}}</div> -->
       <!-- <receipt /> -->
-      <receipt2 />
+      <!-- <receipt2 /> -->
       <!-- <img :src="url" alt="" srcset=""> -->
+      <div class="main">
+          <div class="child"></div>
+          <!-- <div class="child2"></div> -->
+      </div>
+      <div>wrwrweerwe</div>
   </div>
 </template>
 
@@ -76,38 +81,29 @@ export default {
         // })
         // console.log(data)
 
-        function deepClone(obj) {
-            let result
-            const type = isClass(obj)
-            if (type === 'Object') {
-                result = {}
-            } else if (type === 'Array') {
-                result = []
-            } else {
-                return obj
-            }
-            
-            for(let key in obj) {
-                const val = obj[key]
-                if(['Object', 'Array'].includes(isClass(val))) {
-                    // 在严格模式下，禁止使用该种办法
-                    // result[key] = arguments.callee(val) //递归
-                    result[key] = deepClone(val)
-                } else {
-                    result[key] = val
+        function debounce(fn, ms = 1000) {
+            let timer;
+            return function (...args) {
+                if (timer) {
+                    clearTimeout(timer)
                 }
+                timer = setTimeout(() => {
+                    fn.apply(this, args)
+                }, ms)
             }
-            return result
+            // if (timer) {
+            //     clearTimeout(timer)
+            // } else {
+            //     timer = setTimeout(() => {
+            //         fn()
+            //     }, ms)
+            // }
         }
 
-        //判断对象类型
-        function isClass(obj) {
-            // Object.prototype.toString.call(obj) [object '类型']
-            return Object.prototype.toString.call(obj).slice(8, -1)
-        }
-
-        console.log(deepClone(arr))
-
+        // 测试
+        const cons = () => { console.log('debounce') }
+        // const debounceFn = debounce(cons, 1000)
+        window.addEventListener('scroll', debounce(cons, 1000))
     },
     methods: {
         inputChange(v) {
@@ -168,6 +164,36 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.main{
+    width: 500px;
+    height: 300px;
+    padding: 10px 10px;
+    margin: 10px 10px;
+    border: solid 1px red;
+    /* 
+        标准盒子模型
+        width = content
+     */
+    /* box-sizing: content-box; */
+    /* 
+        IE盒子模型
+        width = content+padding+border
+    */
+    /* box-sizing: border-box; */
+}
+.child{
+    width: 80%;
+    height: 100%;
+    /* margin: 0 auto; */
+    /* padding: 20px 20px; */
+    /* margin: 30px 20px; */
+    margin-bottom: 30px;
+    border: solid 1px red;
+}
+/* .child2{
+    width: 100%;
+    height: 100%;
+    border: solid 1px red;
+} */
 </style>
