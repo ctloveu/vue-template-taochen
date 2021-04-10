@@ -1,10 +1,12 @@
 <template>
   <div style="height: 2000px;">
+      <el-input v-model="val" @input="valChange"></el-input>
+      <div class="box" @click="boxClick"></div>
       <!-- <input v-model.lazy="msg" />
       <el-input v-model.lazy="msg" @change="inputChange(msg)" />
       <div>{{msg}}</div>
       <div>{{num}}:{{msg}}</div> -->
-      <!-- <receipt /> -->
+      <receipt />
       <!-- <receipt2 /> -->
       <!-- <img :src="url" alt="" srcset=""> -->
       <div class="main">
@@ -18,17 +20,28 @@
 <script>
 import receipt from './receipt.vue'
 import receipt2 from './receipt2.vue'
+import debounce from '@library/function/debounce'
+import throttle from '@library/function/throttle'
+import { conunt, testObj} from './dataEsModule.js'
 
+let countCommon = require('./dataCommon.js').countCommon 
+let commonObj = require('./dataCommon.js').commonObj
 export default {
     components: { receipt, receipt2 },
     data() {
         return {
             msg: '',
             num: 0,
+            val: ''
         }
     },
     mounted() {
-        console.log(this.url)
+        console.log(conunt)
+        console.log(testObj)
+
+        console.log('countCommon', countCommon)
+        console.log('commonObj', commonObj)
+        // console.log(this.url)
         const arr = [
             {
                 parentId: 0,
@@ -76,36 +89,17 @@ export default {
                 name: '2312213'
             },
         ]
-        // const data = this.translateDataToTree(arr, {
-        //     pId: 'parentId'
-        // })
-        // console.log(data)
 
-        function debounce(fn, ms = 1000) {
-            let timer;
-            return function (...args) {
-                if (timer) {
-                    clearTimeout(timer)
-                }
-                timer = setTimeout(() => {
-                    fn.apply(this, args)
-                }, ms)
-            }
-            // if (timer) {
-            //     clearTimeout(timer)
-            // } else {
-            //     timer = setTimeout(() => {
-            //         fn()
-            //     }, ms)
-            // }
-        }
-
-        // 测试
-        const cons = () => { console.log('debounce') }
-        // const debounceFn = debounce(cons, 1000)
-        window.addEventListener('scroll', debounce(cons, 1000))
+        this.valChange = debounce(this.valChange, 1000)
+        this.boxClick = throttle(this.boxClick, 2000)
     },
     methods: {
+        valChange() {
+            console.log(325235)
+        },
+        boxClick() {
+            console.log('1s只执行一次')
+        },
         inputChange(v) {
             this.num++
         },
@@ -196,4 +190,10 @@ export default {
     height: 100%;
     border: solid 1px red;
 } */
+.box{
+    width: 100px;
+    height: 100px;
+    background: red;
+    cursor: pointer;
+}
 </style>
