@@ -228,19 +228,3 @@ module.exports = {
             )
     }
 }
-
-// 清除dist文件夹
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-
-// module.exports = {
-//  plugins: [
-//    new CleanWebpackPlugin()
-//  ],
-//   module:{
-//     rules: [{
-//       test: /\.css$/,
-//       //对同一个模块使用多个loader，执行加载顺序是从后往前
-//       use: ['style-loader', 'css-loader']
-//     }]
-//   }
-// }
