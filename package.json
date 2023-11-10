@@ -7,7 +7,7 @@
     "server": "node server.js"
   },
   "dependencies": {
-    "axios": "0.18.0",
+    "axios": "1.6.0",
     "echarts": "^4.2.1",
     "echarts-gl": "^1.1.1",
     "element-ui": "2.10.0",
